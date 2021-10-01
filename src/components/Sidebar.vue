@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar-nav">
     <div class="filter">
-      <h2>Filter</h2>
+      <h3>Filter</h3>
       <select name="cars" id="cars">
         <option class="options" value=""></option>
         <option class="options" value="free-shipping">Free Shipping</option>
@@ -12,7 +12,7 @@
     </div>
 
     <div class="category">
-      <h2>Categories</h2>
+      <h3>Categories</h3>
       <li>
         <i class="fas fa-house-user"></i>
         <p>Home & Office</p>
@@ -69,10 +69,10 @@ export default {
 }
 
 .filter {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
-.filter h2 {
+.filter h3 {
   margin-bottom: 10px;
 }
 
@@ -81,8 +81,8 @@ select {
   border-radius: 10px;
 }
 
-.category h2 {
-  margin-bottom: 20px;
+.category h3 {
+  margin-bottom: 10px;
 }
 
 .category li {

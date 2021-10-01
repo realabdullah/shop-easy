@@ -8,7 +8,116 @@
           <div class="details">
             <p class="price">$120.10</p>
             <p class="name">Sony Ultimate Ears</p>
-            <button class="add-cart">View</button>
+            <div class="buttons">
+              <button class="view">View</button>
+              <button class="add-cart">
+                <i class="fas fa-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="rp-card">
+          <img src="../assets/airmax.png" alt="airmax">
+          <div class="details">
+            <p class="price">$320.10</p>
+            <p class="name">Nike - Airmax Sneakers</p>
+            <div class="buttons">
+              <button class="view">View</button>
+              <button class="add-cart">
+                <i class="fas fa-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="rp-card">
+          <img src="../assets/airpod.png" alt="airpod">
+          <div class="details">
+            <p class="price">$199.99</p>
+            <p class="name">Apple - Airpods Pro</p>
+            <div class="buttons">
+              <button class="view">View</button>
+              <button class="add-cart">
+                <i class="fas fa-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="rp-card">
+          <img src="../assets/cap.png" alt="cap">
+          <div class="details">
+            <p class="price">$365.00</p>
+            <p class="name">Nike - Face Cap</p>
+            <div class="buttons">
+              <button class="view">View</button>
+              <button class="add-cart">
+                <i class="fas fa-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="rp-card">
+          <img src="../assets/hisense.png" alt="hisense">
+          <div class="details">
+            <p class="price">$1,320.00</p>
+            <p class="name">HiSense 50" Smart UHD 4K TV+</p>
+            <div class="buttons">
+              <button class="view">View</button>
+              <button class="add-cart">
+                <i class="fas fa-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="rp-card">
+          <img src="../assets/iphone.png" alt="iphone">
+          <div class="details">
+            <p class="price">$1,200.00</p>
+            <p class="name">Apple - Iphone 13</p>
+            <div class="buttons">
+              <button class="view">View</button>
+              <button class="add-cart">
+                <i class="fas fa-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="rp-card">
+          <img src="../assets/nike-bag.png" alt="nike-bag">
+          <div class="details">
+            <p class="price">$119.23</p>
+            <p class="name">SNike Backpack - Blue</p>
+            <div class="buttons">
+              <button class="view">View</button>
+              <button class="add-cart">
+                <i class="fas fa-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="rp-card">
+          <img src="../assets/samsung.png" alt="samsung">
+          <div class="details">
+            <p class="price">$799.00</p>
+            <p class="name">Samsung Galaxy S21</p>
+            <div class="buttons">
+              <button class="view">View</button>
+              <button class="add-cart">
+                <i class="fas fa-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="rp-card">
+          <img src="../assets/tv.png" alt="tv">
+          <div class="details">
+            <p class="price">$420.60</p>
+            <p class="name">Itel 19" Inches A1940BE HD ELED TV</p>
+            <div class="buttons">
+              <button class="view">View</button>
+              <button class="add-cart">
+                <i class="fas fa-cart-plus"></i>
+              </button>
+            </div>
           </div>
         </div>
         <div class="rp-card">
@@ -16,23 +125,12 @@
           <div class="details">
             <p class="price">$120.10</p>
             <p class="name">Sony Ultimate Ears</p>
-            <button class="add-cart">View</button>
-          </div>
-        </div>
-        <div class="rp-card">
-          <img src="../assets/headset.png" alt="headset">
-          <div class="details">
-            <p class="price">$120.10</p>
-            <p class="name">Sony Ultimate Ears</p>
-            <button class="add-cart">View</button>
-          </div>
-        </div>
-        <div class="rp-card">
-          <img src="../assets/headset.png" alt="headset">
-          <div class="details">
-            <p class="price">$120.10</p>
-            <p class="name">Sony Ultimate Ears</p>
-            <button class="add-cart">View</button>
+            <div class="buttons">
+              <button class="view">View</button>
+              <button class="add-cart">
+                <i class="fas fa-cart-plus"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -59,29 +157,31 @@ export default {
 
 .rp-container {
   display: flex;
-  align-items: center;
+  align-items: stretch;
+  flex-wrap: wrap;
 }
 
 .rp-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  flex: 1 16%;
   background-image: linear-gradient(to right top, #fd1b2d, #dd1423, #bd0d1a, #9f0511, #820008);
   border-radius: 15px;
   margin: 10px;
-  width: 200px;
   height: auto;
   box-shadow: 0px 12px 24px -12px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0px 12px 24px -12px rgba(0, 0, 0, 0.5);
-  padding: 15px;
+ padding: 2%;
 }
 
 .rp-card img {
-  width: 200px;
+  max-width: 100%;
 }
 
 .details {
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -99,9 +199,24 @@ export default {
   margin-bottom: 10px;
 }
 
-.details .add-cart {
+.details .buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.details .buttons .view {
   border: none;
   padding: 10px 25px;
+  border-radius: 25px;
+  background-color: #850009;
+  color: #fff;
+  margin-right: 17px;
+}
+
+.details .buttons .add-cart {
+  border: none;
+  padding: 10px;
   border-radius: 25px;
   background-color: #850009;
   color: #fff;

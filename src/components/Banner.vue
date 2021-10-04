@@ -12,10 +12,6 @@
           <img src="../assets/campaign-two.jpg" alt="ads">
         </div>
       </Slide>
-
-      <template #addons>
-        <!-- <Pagination /> -->
-      </template>
     </Carousel>
   </div>
 </template>
@@ -35,7 +31,7 @@ export default {
 <style>
 .banners {
   margin-top: 90px;
-  margin-left: 300px;
+  /* margin-left: 300px; */
   height: 200px;
 }
 

@@ -169,9 +169,11 @@
           <p>Bag</p>
         </li>
         <li>
-          <button class="login">
-            Login
-          </button>
+          <router-link to="/add-product">
+            <button class="login">
+              Add Product
+            </button>
+          </router-link>
         </li>
       </nav>
     </div>
@@ -273,7 +275,7 @@ export default {
   transition: 0.2s ease-in;
 }
 
-.navbar-nav nav li .login {
+.navbar-nav nav li a .login {
   border: none;
   outline: none;
   padding: 10px 20px;
@@ -283,7 +285,7 @@ export default {
   font-size: 18px;
 }
 
-.navbar-nav nav li .login:hover {
+.navbar-nav nav li a .login:hover {
   cursor: pointer;
   background: #1601fd;
 }

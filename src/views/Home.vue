@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Navbar />
-    <Sidebar />
+    <!-- <Sidebar /> -->
     <Banner />
     <Products />
   </div>
@@ -12,7 +12,7 @@
 
 <script>
 import Navbar from '../components/Navbar.vue'
-import Sidebar from '../components/Sidebar.vue'
+// import Sidebar from '../components/Sidebar.vue'
 import Banner from '../components/Banner.vue'
 import Products from '../components/Products.vue'
 
@@ -20,7 +20,7 @@ export default {
   name: 'Home',
   components: {
     Navbar,
-    Sidebar,
+    // Sidebar,
     Banner,
     Products
   }

@@ -7,7 +7,7 @@
           <router-link :to="{ name: 'Product', params: { name: produce.name }}">
             <img :src="produce.file" alt="headset">
             <div class="details">
-              <p class="price">{{ produce.price }}</p>
+              <p class="price">${{ produce.price }}</p>
               <p class="name">{{ produce.name }}</p>
               <div class="buttons">
                 <button class="view">View</button>

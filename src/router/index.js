@@ -8,14 +8,29 @@ const routes = [
     component: Home
   },
   {
-    path: '/add-product',
-    name: 'Add Product',
-    component: () => import('../views/AddProduct.vue')
-  },
-  {
     path: '/product/:name',
     name: 'Product',
     component: () => import('../views/Product.vue')
+  },
+  {
+    path: '/admin-board',
+    name: 'Admin Board',
+    component: () => import('../views/AdminBoard.vue')
+  },
+  {
+    path: '/admin-board/add-product',
+    name: 'Add Product',
+    component: () => import('../components/AddProduct.vue')
+  },
+  {
+    path: '/admin-board/update-product/:name',
+    name: 'Update Product',
+    component: () => import('../components/UpdateProduct.vue')
+  },
+  {
+    path: '/admin-board/view-products',
+    name: 'View Products',
+    component: () => import('../components/ViewProducts.vue')
   }
 ]
 

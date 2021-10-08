@@ -169,7 +169,7 @@
           <p>Bag</p>
         </li>
         <li>
-          <router-link to="/add-product">
+          <router-link to="/admin-board">
             <button class="login">
               Add Product
             </button>

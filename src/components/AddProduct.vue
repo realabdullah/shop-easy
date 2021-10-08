@@ -1,9 +1,5 @@
 <template>
-  <nav class="p-3 navbar navbar-dark bg-dark justify-content-between flex-row">
-    <div class="container-fluid">
-      <a class="navbar-brand float-left">ShopEasy</a>
-    </div>
-  </nav>
+  <AdminBar />
 
   <div class="row justify-content-center mt-5 pb-5">
     <div class="col-md-5">
@@ -60,10 +56,14 @@
 </template>
 
 <script>
+import AdminBar from '../components/AdminBar.vue'
 import { ref } from 'vue'
 import { supabase } from '../supabase'
 
 export default {
+  components: {
+    AdminBar
+  },
   setup() {
     const name = ref('')
     const description = ref('')

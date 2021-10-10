@@ -38,7 +38,7 @@ export default {
   display: none;
 }
 
-@media(max-width: 200px) {
+@media(min-width: 200px) {
   .home {
     display: none;
   }

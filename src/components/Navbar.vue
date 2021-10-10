@@ -169,7 +169,13 @@
           <p>Bag</p>
         </li>
         <li>
-          <router-link to="/sign-up">
+          <router-link to="/admin-board" v-if="user">
+            <button class="login">
+              Dashboard
+            </button>
+          </router-link>
+
+          <router-link to="/sign-up" v-else>
             <button class="login">
               Create account
             </button>
@@ -181,8 +187,16 @@
 </template>
 
 <script>
-export default {
+import { supabase } from '../supabase'
 
+export default {
+  setup() {
+    const user = supabase.auth.user()
+
+    return {
+      user
+    }
+  }
 }
 </script>
 
@@ -288,5 +302,33 @@ export default {
 .navbar-nav nav li a .login:hover {
   cursor: pointer;
   background: #1601fd;
+}
+
+@media(max-width: 800px) {
+  .navbar-main {
+    padding: 10px 7px;
+  }
+
+  .navbar-search {
+    display: none;
+  }
+
+  .navbar-nav nav li a .login {
+    padding: 7px 10px;
+    font-size: 10px;
+  }
+
+  .navbar-nav nav li {
+    padding: 8px;
+  }
+
+  .navbar-nav nav .cart svg {
+    width: 18px;
+    margin-right: 5px;
+  }
+
+  .navbar-nav nav .cart p {
+    font-size: 13px;
+  }
 }
 </style>

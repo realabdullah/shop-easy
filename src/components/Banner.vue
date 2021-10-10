@@ -39,4 +39,14 @@ export default {
   width: auto;
   height: 475px;
 }
+
+@media(max-width: 800px) {
+  .banners {
+    margin-top: 60px;
+  }
+
+  .carousel__item img {
+    height: 255px;
+  }
+}
 </style>

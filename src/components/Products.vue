@@ -151,4 +151,15 @@ export default {
 a {
   text-decoration: none;
 }
+
+@media(max-width: 800px) {
+  .products {
+    margin-top: 70px;
+    padding: 10px;
+  }
+
+  .recommended h2 {
+    margin-bottom: 10px;
+  }
+}
 </style>

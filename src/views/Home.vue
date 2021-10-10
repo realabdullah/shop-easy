@@ -15,6 +15,8 @@ import Navbar from '../components/Navbar.vue'
 // import Sidebar from '../components/Sidebar.vue'
 import Banner from '../components/Banner.vue'
 import Products from '../components/Products.vue'
+import { onBeforeMount, ref } from 'vue'
+import { supabase } from '../supabase'
 
 export default {
   name: 'Home',
@@ -36,7 +38,7 @@ export default {
   display: none;
 }
 
-@media(min-width: 200px) {
+@media(max-width: 200px) {
   .home {
     display: none;
   }

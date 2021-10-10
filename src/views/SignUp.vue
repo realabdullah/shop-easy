@@ -76,6 +76,7 @@ export default {
           password: password.value,
         })
         registered.value = true
+        console.log(user)
       }
       catch(error) {
         console.log('Error signing up!')

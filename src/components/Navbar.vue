@@ -169,9 +169,9 @@
           <p>Bag</p>
         </li>
         <li>
-          <router-link to="/admin-board">
+          <router-link to="/sign-up">
             <button class="login">
-              Add Product
+              Create account
             </button>
           </router-link>
         </li>

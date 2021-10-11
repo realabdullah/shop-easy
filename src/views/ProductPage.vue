@@ -17,7 +17,7 @@
           <p class="not-stock" v-else>Out of stock</p>
         </div>
         <div class="cart-section">
-          <button class="to-cart">
+          <button @click="useAddCart" class="to-cart">
             Add to cart
           </button>
         </div>
@@ -31,15 +31,18 @@ import { ref, reactive, computed, onBeforeMount } from 'vue'
 import { useRoute } from 'vue-router'
 import { supabase } from '../supabase'
 import Navbar from '../components/Navbar.vue'
+import addCart from '../composables/addCart'
 
 export default {
   components: {
     Navbar
   },
   setup() {
+    const { addToCart, cartArray } = addCart()
     const route = useRoute()
     const singleProductName = computed(() => route.params.name)
     const productInfoHolder = ref([])
+    const getCat = ref([])
 
     const productInfo = reactive({
       image: '',
@@ -68,12 +71,30 @@ export default {
       }
     }
 
+    const loadCart = () => {
+      if (localStorage.getItem("books")){
+        getCat.value = JSON.parse(localStorage.getItem("cartArray"))
+        console.log(getCat)
+      }
+    }
+
+    const useAddCart = () => {
+      const newItem = productInfo
+      cartArray.push(newItem)
+      addToCart()
+      console.log(getCat)
+    }
+
     onBeforeMount(() => {
       getProductInfo()
+      if (localStorage.getItem("cartArray")){
+        getCat.value = JSON.parse(localStorage.getItem("cartArray"))
+      }
     })
 
     return {
-      productInfo
+      productInfo,
+      useAddCart
     }
   }
 }

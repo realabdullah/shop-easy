@@ -166,7 +166,7 @@
 <g>
 </g>
           </svg>
-          <p>Bag</p>
+          <p @click="openCart">Bag({{ cartItems.length }})</p>
         </li>
         <li>
           <router-link to="/admin-board" v-if="user">
@@ -184,17 +184,79 @@
       </nav>
     </div>
   </div>
+
+  <div class="fixed z-10 inset-0 overflow-y-auto mt-20" aria-labelledby="modal-title" role="dialog" aria-modal="true" v-if="!cartOpen">
+    <div class="flex flex-col items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <button @click="closeCart" class="btn btn-danger">
+          Close Cart
+        </button>
+        <div class="bg-white px-4 pt-5 sm:p-6 sm:pb-4">
+          <div class="flex items-center flex-col justify-center sm:flex sm:items-start">
+            <div class="mx-auto flex items-center flex-col justify-center sm:mx-0 sm:h-10 sm:w-10">
+              <h2 class="text-lg font-bold">
+                Cart Items
+              </h2>
+            </div>
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <div v-for="item in cartItems" :key="item.id" class="flex items-center justify-around p-3 sm:flex mt-2">
+                <div class="flex-shrink-0 w-10 h-10 me-2">
+                  <img class="w-10 h-10 rounded-full"
+                    :src="item.image"
+                    alt="product">
+                </div>
+                <p class="text-m text-dark-500 me-5">
+                  {{ item.name }}
+                </p>
+                <p class="text-sm text-gray-500 font-semibold">
+                  ${{ item.price }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import { supabase } from '../supabase'
+import { ref, onBeforeMount } from 'vue'
+import addCart from '../composables/addCart'
 
 export default {
   setup() {
+    const { cartArray } = addCart()
     const user = supabase.auth.user()
+    const cartItems = ref([])
+    const cartOpen = ref(true)
+
+    const openCart = () => {
+      cartOpen.value = false
+    }
+
+    const closeCart = () => {
+      cartOpen.value = true
+    }
+
+    onBeforeMount(() => {
+      if (localStorage.getItem("cartArray")){
+        cartItems.value = JSON.parse(localStorage.getItem("cartArray"))
+      }
+    })
 
     return {
-      user
+      user,
+      cartItems,
+      cartOpen,
+      openCart,
+      closeCart
     }
   }
 }

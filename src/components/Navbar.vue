@@ -106,9 +106,9 @@
       <h1>Shop Easy!</h1>
     </div>
 
-    <div class="navbar-search">
+    <!-- <div class="navbar-search">
       <input type="text" name="search" id="search" placeholder="Search for products...">
-    </div>
+    </div> -->
 
     <div class="navbar-nav">
       <nav>
@@ -168,8 +168,8 @@
           </svg>
           <p @click="openCart">Bag({{ cartItems.length }})</p>
         </li>
-        <li>
-          <router-link to="/admin-board" v-if="user">
+        <!-- <li>
+          <router-link to="/" v-if="user">
             <button class="login">
               Dashboard
             </button>
@@ -180,7 +180,7 @@
               Create account
             </button>
           </router-link>
-        </li>
+        </li> -->
       </nav>
     </div>
   </div>

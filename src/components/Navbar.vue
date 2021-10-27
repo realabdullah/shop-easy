@@ -381,7 +381,7 @@ export default {
   float: right;
   background: white;
   width: auto;
-  position: absolute;
+  position: fixed;
   top: 75px;
   right: 10px;
   border-radius: 3px;

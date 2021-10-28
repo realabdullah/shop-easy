@@ -23,7 +23,7 @@
           </span>
           <div class="product-properties">
             <span class="product-price">
-              USD<b>{{ productInfo.price }}</b>
+              <span> &#8358; </span><b>{{ productInfo.price.toLocaleString() }}</b>
             </span>
           </div>
         </div>
@@ -60,6 +60,11 @@ export default {
       available: ''
     })
 
+    function formatPrice(value) {
+      let val = (value/1).toFixed(2).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    }
+
     const getProductInfo = async () => {
       try {
         const data = await supabase
@@ -90,7 +95,8 @@ export default {
 
     return {
       productInfo,
-      addProduct
+      addProduct,
+      formatPrice
     }
   }
 }
@@ -190,9 +196,8 @@ export default {
 .product-caption {
   display: block;
   padding: 0 20px;
-  font-size: 30px;
+  font-size: 1.3rem;
   font-weight: 400;
-  text-transform: uppercase;
 }
 
 .product-price {

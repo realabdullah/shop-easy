@@ -189,7 +189,7 @@
     <div class="shopping-cart-header">
       <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
       <div class="shopping-cart-total">
-        <span class="lighter-text">Total: ${{ total }}</span>
+        <span class="lighter-text">Total: <span> &#8358; </span>{{ formatPrice(total) }}</span>
         <!-- <span class="main-color-text">$2,229.97</span> -->
       </div>
     </div> <!--end shopping-cart-header -->
@@ -198,7 +198,7 @@
       <li class="clearfix" v-for="item in cart" :key="item.id">
         <img :src="item.file" alt="admin">
         <span class="item-name">{{ item.name }}</span>
-        <span class="item-price">${{ item.price }}</span>
+        <span class="item-price"><span> &#8358; </span>{{ formatPrice(item.price) }}</span>
       </li>
     </ul>
 
@@ -225,6 +225,11 @@ export default {
       cartOpen.value = true
     }
 
+    function formatPrice(value) {
+      let val = (value/1).toFixed(2).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    }
+
     // onBeforeMount(() => {
       
     //   }
@@ -236,7 +241,8 @@ export default {
       total: computed(() => store.getters.getTotal),
       cartOpen,
       openCart,
-      closeCart
+      closeCart,
+      formatPrice
     }
   }
 }

@@ -8,7 +8,7 @@
             <img :src="product.file" alt="headset">
           </router-link>
             <div class="details">
-              <p class="price">${{ product.price }}</p>
+              <p class="price">${{ product.price.toLocaleString() }}</p>
               <p class="name">{{ product.name }}</p>
               <div class="buttons">
                 <button class="view">
@@ -147,6 +147,7 @@ export default {
 }
 
 a {
+  color: #fff;
   text-decoration: none;
 }
 

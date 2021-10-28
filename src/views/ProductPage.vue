@@ -215,7 +215,7 @@ export default {
 .product-caption {
   display: block;
   padding: 0 20px;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 400;
   text-transform: uppercase;
 }

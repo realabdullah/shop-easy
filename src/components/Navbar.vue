@@ -379,7 +379,6 @@ export default {
 
 .shopping-cart {
   margin: 20px 0;
-  float: right;
   background: white;
   width: auto;
   position: fixed;
@@ -388,6 +387,8 @@ export default {
   border-radius: 3px;
   padding: 20px;
   z-index: 999;
+  height: 80%;
+  overflow: scroll;
 }
 .shopping-cart .shopping-cart-header {
   border-bottom: 1px solid #E8E8E8;

@@ -17,7 +17,7 @@
       </div>
     </div> <!--end shopping-cart-header -->
 
-    <a href="#" class="button">Checkout</a>
+    <a href="#" class="button">Proceed to payment</a>
   </div> <!--end shopping-cart -->
 </template>
 

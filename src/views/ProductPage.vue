@@ -8,7 +8,7 @@
         <div class="product-detail">
           <h2>{{ productInfo.name }}</h2>
         </div>
-        <img :src="productInfo.image" alt="Shoe" class="product-img">
+        <img :src="productInfo.file" alt="Shoe" class="product-img">
       </div>
       <div class="card-body">
         <div class="product-desc">
@@ -26,6 +26,9 @@
               <span> &#8358; </span><b>{{ productInfo.price.toLocaleString() }}</b>
             </span>
           </div>
+          <span @click="addProduct(productInfo)" class="cart-button">
+            Add to cart
+          </span>
         </div>
       </div>
       <span @click="addProduct(product)" class="cart-button">
@@ -53,7 +56,7 @@ export default {
     const productInfoHolder = ref([])
 
     const productInfo = reactive({
-      image: '',
+      file: '',
       name: '',
       description: '',
       price: '',
@@ -61,8 +64,8 @@ export default {
     })
 
     function formatPrice(value) {
-      let val = (value/1).toFixed(2).replace('.', ',')
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      let val = (value/1).toFixed(2).replace(',', '.')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
 
     const getProductInfo = async () => {
@@ -76,7 +79,7 @@ export default {
         productInfo.name = newDetails.name,
         productInfo.description = newDetails.description,
         productInfo.price = newDetails.price,
-        productInfo.image = newDetails.file,
+        productInfo.file = newDetails.file,
         productInfo.available = newDetails.available
       }
       catch(error) {
@@ -232,89 +235,16 @@ export default {
   box-shadow: -10px 20px 15px -10px rgba(17, 233, 91, 0.3);
   margin: 20px;
   margin-top: 30px;
+  cursor: pointer;
 }
 
 .product-price b {
   margin-left: 3px;
 }
 
-
-/* .product-container {
-  margin-top: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 30px;
-} */
-
-/* .product-img {
-  width: 100%;
-  margin-right: 70px;
-} */
-
-/* .product-img img {
-  max-width: 100%;
-} */
-
-/* .product-body {
-} */
-
-/* .product-body .product-details {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 0 30px;
+.product-desc .cart-button {
+  display: none;
 }
-
-.product-details .product-name {
-  padding: 20px 0;
-  font-size: 42px;
-  font-weight: bold;
-}
-
-.product-details .product-desc {
-  padding: 20px 0;
-}
-
-.sub-details {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20 0px;
-}
-
-.sub-details .price {
-  margin-right: 10px;
-  font-weight: bold;
-}
-
-.sub-details .stock {
-  padding: 5px 10px;
-  background: #4a8b1e60;
-  color: #fff;
-  border-radius: 20px;
-}
-
-.sub-details .not-stock {
-  padding: 5px 10px;
-  background: #ec07079d;
-  color: #fff;
-  border-radius: 20px;
-}
-
-.to-cart {
-  margin: 20px 0;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  background: #333;
-  color: #fff;
-}
-
-.to-cart:hover {
-  background: #33333385;
-} */
 
 @media(max-width: 800px) {
   .ccard {
@@ -322,57 +252,73 @@ export default {
     flex-direction: column;
   }
 
-  .card-body {
-  }
-
-  .card-head {
-  }
-
   .product-desc {
     display: flex;
     flex-direction: column;
   }
+}
 
+@media(min-width: 801px) {
+  .ccard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
 
-  /* .product-container {
-    margin-top: 100px;
+  .card-head {
+    width: 50%;
+    padding: 25px;
+    background: none;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
     flex-direction: column;
-    padding: 0;
+  }
+
+  .card-body {
+    width: 50%;
+    padding-right: 100px;
+  }
+
+  .card-head .card-logo {
+    width: 55px;
+    margin: 20px 0;
+  }
+
+  .product-detail {
+    margin: 20px 0;
+    color: #333;
   }
 
   .product-img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: auto;
-    margin-bottom: 30px;
+    margin: 20px 0;
+    max-width: 100%;
+    height: auto;
   }
 
-  .product-body {
-    background-image: linear-gradient(to right top, #fd1b2d, #dd1423, #bd0d1a, #9f0511, #820008);
-    color: #fff;
-    border-radius: 20px 20px 0 0;
-    padding-top: 20px;
+  .cart-button {
+    display: none;
   }
 
-  .product-details .product-name {
-    padding: 10px 0;
-    font-size: 22px;
-    font-weight: bold;
-    color: #fff;
+  .product-title {
+    margin-bottom: 20px;
   }
 
-  .product-details .product-desc {
-    padding-bottom: 20px;
-    color: #fff;
+  .product-caption {
+    margin: 20px 0;
+    font-size: 1.5rem;
+    line-height: 2.4rem;
   }
 
-  .cart-section {
-    width: 100%;
-  }
+  .product-price {
+    margin: 20px 0;
+  } 
 
-  .to-cart {
-    width: 100%;
-  } */
+  .product-desc .cart-button {
+    display: block;
+    padding: 15px;
+    cursor: pointer;
+  }
 }
 </style>

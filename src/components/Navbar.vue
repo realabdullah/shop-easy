@@ -166,7 +166,9 @@
 <g>
 </g>
           </svg>
-          <p @click="openCart">Bag({{ cart.length }})</p>
+          <p class="bag" @click="openCart">Bag
+            <span class="cart-no">{{ cart.length }}</span>
+          </p>
         </li>
         <!-- <li>
           <router-link to="/" v-if="user">
@@ -187,7 +189,7 @@
 
   <div class="shopping-cart" v-if="!cartOpen">
     <div class="shopping-cart-header">
-      <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
+      <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">{{cart.length}}</span>
       <div class="shopping-cart-total">
         <span class="lighter-text">Total: <span> &#8358; </span>{{ formatPrice(total) }}</span>
         <!-- <span class="main-color-text">$2,229.97</span> -->
@@ -226,8 +228,8 @@ export default {
     }
 
     function formatPrice(value) {
-      let val = (value/1).toFixed(2).replace('.', ',')
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      let val = (value/1).toFixed(2).replace(',', '.')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
 
     // onBeforeMount(() => {
@@ -350,6 +352,20 @@ export default {
 .navbar-nav nav li a .login:hover {
   cursor: pointer;
   background: #1601fd;
+}
+
+.bag {
+  position: relative;
+}
+
+.cart-no {
+  position: absolute;
+  top: -15px;
+  right: -30px;
+  padding: 3px 10px;
+  border-radius: 100%;
+  background-color: #fff;
+  color: #6953e0;
 }
 
 @media(max-width: 800px) {

@@ -4,7 +4,7 @@
   <div class="ccontainer">
     <div class="ccard">
       <div class="card-head">
-        <img :src="productInfo.image" alt="logo" class="card-logo">
+        <img :src="productInfo.file" alt="logo" class="card-logo">
         <div class="product-detail">
           <h2>{{ productInfo.name }}</h2>
         </div>
@@ -31,7 +31,7 @@
           </span>
         </div>
       </div>
-      <span @click="addProduct(product)" class="cart-button">
+      <span @click="addProduct(productInfo)" class="cart-button">
         Add to cart
       </span>
     </div>

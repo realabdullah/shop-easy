@@ -1,41 +1,14 @@
 <template>
   <Navbar />
 
-  <!-- <div class="product-container">
-    <div class="product-img">
-      <img :src="productInfo.image" alt="admin">
-    </div>
-    <div class="product-body">
-      <div class="product-details">
-        <h1 class="product-name">{{ productInfo.name }}</h1>
-        <p class="product-desc">
-          {{ productInfo.description }}
-        </p>
-        <div class="sub-details">
-          <h3 class="price">${{ productInfo.price }}</h3>
-          <p class="stock" v-if="productInfo.available">In-stock</p>
-          <p class="not-stock" v-else>Out of stock</p>
-        </div>
-        <div class="cart-section">
-          <button @click="addProduct(product)" class="to-cart">
-            Add to cart
-          </button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
   <div class="ccontainer">
     <div class="ccard">
       <div class="card-head">
         <img :src="productInfo.image" alt="logo" class="card-logo">
-        <img :src="productInfo.image" alt="Shoe" class="product-img">
         <div class="product-detail">
           <h2>{{ productInfo.name }}</h2>
         </div>
-        <span class="back-text">
-          FAS
-        </span>
+        <img :src="productInfo.image" alt="Shoe" class="product-img">
       </div>
       <div class="card-body">
         <div class="product-desc">
@@ -52,12 +25,12 @@
             <span class="product-price">
               USD<b>{{ productInfo.price }}</b>
             </span>
-            <span class="cart-button">
-              Add to cart
-            </span>
           </div>
         </div>
       </div>
+      <span @click="addProduct(product)" class="cart-button">
+        Add to cart
+      </span>
     </div>
   </div>
 </template>
@@ -126,6 +99,7 @@ export default {
 <style scoped>
 .ccontainer {
   margin: 60px auto;
+  margin-bottom: 0px;
 }
 
 .ccard {
@@ -155,8 +129,9 @@ export default {
 }
 
 .product-img {
-  position: absolute;
-  margin-top: -55px;
+  width: 100%;
+  height: auto;
+  padding: 20px;
 }
 
 .product-detail {
@@ -230,10 +205,17 @@ export default {
   color: #fff;
   border-radius: 7px;
   box-shadow: -10px 20px 15px -10px rgba(17, 233, 91, 0.3);
-  margin: 20px;
+  margin-top: 15px;
+  margin-left: 20px;
 }
 
 .cart-button {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: auto;
+  border: none;
   background: #6952df;
   padding: 7px 20px;
   text-align: center;
@@ -244,6 +226,7 @@ export default {
   border-radius: 7px;
   box-shadow: -10px 20px 15px -10px rgba(17, 233, 91, 0.3);
   margin: 20px;
+  margin-top: 30px;
 }
 
 .product-price b {
@@ -330,6 +313,17 @@ export default {
 
 @media(max-width: 800px) {
   .ccard {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-body {
+  }
+
+  .card-head {
+  }
+
+  .product-desc {
     display: flex;
     flex-direction: column;
   }

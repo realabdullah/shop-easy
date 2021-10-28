@@ -202,7 +202,7 @@
       </li>
     </ul>
 
-    <a href="#" class="button">Checkout</a>
+     <router-link class="button" to="/checkout">Checkout</router-link>
   </div> <!--end shopping-cart -->
 </template>
 
@@ -467,6 +467,4 @@ export default {
   display: table;
   clear: both;
 }
-
-
 </style>

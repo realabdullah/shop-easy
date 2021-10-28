@@ -198,7 +198,7 @@
       <li class="clearfix" v-for="item in cart" :key="item.id">
         <img :src="item.file" alt="admin">
         <span class="item-name">{{ item.name }}</span>
-        <span class="item-price"><span> &#8358; </span>{{ item.price.toLocaleString() }}</span>
+        <span class="item-price"><span> &#8358; </span>{{ item.price }}</span>
       </li>
     </ul>
 
@@ -238,7 +238,7 @@ export default {
     return {
       user,
       cart: computed(() => store.getters.getCart),
-      total: computed(() => store.getters.getTotal),
+      total: computed(() => store.getters.getTotal.toLocaleString()),
       cartOpen,
       openCart,
       closeCart,

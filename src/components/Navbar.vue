@@ -189,7 +189,7 @@
     <div class="shopping-cart-header">
       <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
       <div class="shopping-cart-total">
-        <span class="lighter-text">Total:</span>
+        <span class="lighter-text">Total: ${{ total }}</span>
         <!-- <span class="main-color-text">$2,229.97</span> -->
       </div>
     </div> <!--end shopping-cart-header -->
@@ -233,6 +233,7 @@ export default {
     return {
       user,
       cart: computed(() => store.getters.getCart),
+      total: computed(() => store.getters.getTotal),
       cartOpen,
       openCart,
       closeCart

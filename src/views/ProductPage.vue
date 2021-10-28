@@ -1,7 +1,7 @@
 <template>
   <Navbar />
 
-  <div class="product-container">
+  <!-- <div class="product-container">
     <div class="product-img">
       <img :src="productInfo.image" alt="admin">
     </div>
@@ -20,6 +20,42 @@
           <button @click="addProduct(product)" class="to-cart">
             Add to cart
           </button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="ccontainer">
+    <div class="ccard">
+      <div class="card-head">
+        <img :src="productInfo.image" alt="logo" class="card-logo">
+        <img :src="productInfo.image" alt="Shoe" class="product-img">
+        <div class="product-detail">
+          <h2>{{ productInfo.name }}</h2>
+        </div>
+        <span class="back-text">
+          FAS
+        </span>
+      </div>
+      <div class="card-body">
+        <div class="product-desc">
+          <span class="product-title">
+            <b>{{ productInfo.name }}</b>
+            <span class="badge">
+              New
+            </span>
+          </span>
+          <span class="product-caption">
+            {{ productInfo.description }}
+          </span>
+          <div class="product-properties">
+            <span class="product-price">
+              USD<b>{{ productInfo.price }}</b>
+            </span>
+            <span class="cart-button">
+              Add to cart
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -88,27 +124,154 @@ export default {
 </script>
 
 <style scoped>
-.product-container {
+.ccontainer {
+  margin: 60px auto;
+}
+
+.ccard {
+  display: flex;
+}
+
+.card-head {
+  position: relative;
+  height: auto;
+  padding: 5px;
+  padding-bottom: 20px;
+  overflow: hidden;
+  background: #fa782e;
+  /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #fa782e 8%, #c82930 83%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #fa782e 8%, #c82930 83%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #fa782e 8%, #c82930 83%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#fa782e', endColorstr='#c82930', GradientType=1);
+}
+
+.card-logo {
+  width: 55px;
+  margin: 20px;
+}
+
+.product-img {
+  position: absolute;
+  margin-top: -55px;
+}
+
+.product-detail {
+  padding: 0 20px;
+  font-size: 11px;
+  color: #fff;
+}
+
+.product-detail h2 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.back-text {
+  display: inline-block;
+  font-size: 125px;
+  font-weight: 900;
+  margin-left: -7px;
+  margin-top: -12px;
+  opacity: 0.1;
+}
+
+.card-body {
+  height: auto;
+}
+
+.product-title {
+  padding: 20px;
+  display: block;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.product-title b {
+  font-weight: 900;
+  letter-spacing: 0px;
+}
+
+.badge {
+  position: relative;
+  font-size: 10px;
+  font-weight: 300;
+  color: #fff;
+  background: #11e95b;
+  padding: 2px 5px;
+  border-radius: 4px;
+  top: -2px;
+  margin-left: 5px;
+}
+
+.product-caption {
+  display: block;
+  padding: 0 20px;
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.product-price {
+  background: #11e95b;
+  padding: 7px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 1.3rem;
+  font-weight: 200;
+  color: #fff;
+  border-radius: 7px;
+  box-shadow: -10px 20px 15px -10px rgba(17, 233, 91, 0.3);
+  margin: 20px;
+}
+
+.cart-button {
+  background: #6952df;
+  padding: 7px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 1.3rem;
+  font-weight: 200;
+  color: #fff;
+  border-radius: 7px;
+  box-shadow: -10px 20px 15px -10px rgba(17, 233, 91, 0.3);
+  margin: 20px;
+}
+
+.product-price b {
+  margin-left: 3px;
+}
+
+
+/* .product-container {
   margin-top: 150px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 30px;
-}
+} */
 
-.product-img {
+/* .product-img {
   width: 100%;
   margin-right: 70px;
-}
+} */
 
-.product-img img {
+/* .product-img img {
   max-width: 100%;
-}
+} */
 
 /* .product-body {
 } */
 
-.product-body .product-details {
+/* .product-body .product-details {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -163,10 +326,16 @@ export default {
 
 .to-cart:hover {
   background: #33333385;
-}
+} */
 
 @media(max-width: 800px) {
-  .product-container {
+  .ccard {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  /* .product-container {
     margin-top: 100px;
     flex-direction: column;
     padding: 0;
@@ -205,6 +374,6 @@ export default {
 
   .to-cart {
     width: 100%;
-  }
+  } */
 }
 </style>

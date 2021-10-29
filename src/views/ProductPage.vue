@@ -125,15 +125,16 @@ export default {
   padding: 5px;
   padding-bottom: 20px;
   overflow: hidden;
-  background: #fa782e;
+  backdrop-filter: blur(20px);
+  background-color: rgb(46, 45, 47, 0.9);
   /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #fa782e 8%, #c82930 83%);
+  /* background: -moz-linear-gradient(-45deg, #fa782e 8%, #c82930 83%); */
   /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #fa782e 8%, #c82930 83%);
+  /* background: -webkit-linear-gradient(-45deg, #fa782e 8%, #c82930 83%); */
   /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #fa782e 8%, #c82930 83%);
+  /* background: linear-gradient(135deg, #fa782e 8%, #c82930 83%); */
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#fa782e', endColorstr='#c82930', GradientType=1);
+  /* filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#fa782e', endColorstr='#c82930', GradientType=1); */
 }
 
 .card-logo {
@@ -228,7 +229,7 @@ export default {
   right: 0;
   width: auto;
   border: none;
-  background: #6952df;
+  background: rgb(46, 45, 47);
   padding: 7px 20px;
   text-align: center;
   display: inline-block;

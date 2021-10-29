@@ -26,27 +26,27 @@ const routes = [
   {
     path: '/category/computers',
     name: 'Computers',
-    component: () => import('../views/Accessorycart.vue')
+    component: () => import('../views/Computercat.vue')
   },
   {
     path: '/category/electronics',
     name: 'Electronics',
-    component: () => import('../views/Accessorycart.vue')
+    component: () => import('../views/Electronicscart.vue')
   },
   {
     path: '/category/fashion',
     name: 'Fashion',
-    component: () => import('../views/Accessorycart.vue')
+    component: () => import('../views/Fashioncart.vue')
   },
   {
     path: '/category/phones',
     name: 'Phones',
-    component: () => import('../views/Accessorycart.vue')
+    component: () => import('../views/Phonescat.vue')
   },
   {
     path: '/category/shoes',
     name: 'Shoes',
-    component: () => import('../views/Accessorycart.vue')
+    component: () => import('../views/Shoescart.vue')
   },
   {
     path: '/admin-board',

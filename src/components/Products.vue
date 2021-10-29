@@ -58,7 +58,7 @@ export default {
 
 <style>
 .products {
-  margin-top: 300px;
+  margin-top: 20px;
   /* margin-left: 300px; */
   padding: 30px;
 }

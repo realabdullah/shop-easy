@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <Navbar />
-    <!-- <Sidebar /> -->
     <Banner />
+    <Category />
     <Products />
   </div>
   <div class="mobile">
@@ -12,18 +12,16 @@
 
 <script>
 import Navbar from '../components/Navbar.vue'
-// import Sidebar from '../components/Sidebar.vue'
 import Banner from '../components/Banner.vue'
+import Category from '../components//Category.vue'
 import Products from '../components/Products.vue'
-import { onBeforeMount, ref } from 'vue'
-import { supabase } from '../supabase'
 
 export default {
   name: 'Home',
   components: {
     Navbar,
-    // Sidebar,
     Banner,
+    Category,
     Products
   }
 }

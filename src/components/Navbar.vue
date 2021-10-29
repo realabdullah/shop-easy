@@ -254,10 +254,8 @@ export default {
 
 <style scoped>
 .navbar-main {
-  background: rgba( 55, 25, 213, 0.75 );
+  background: #353030;
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-  backdrop-filter: blur( 9px );
-  -webkit-backdrop-filter: blur( 9px );
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   /* background-image: linear-gradient(to right top, #6138d6, #5d32dd, #5a2be3, #5523ea, #5018f0); */
   position: fixed;
@@ -368,7 +366,7 @@ export default {
   padding: 3px 10px;
   border-radius: 100%;
   background-color: #fff;
-  color: #6953e0;
+  color: rgb(53, 48, 48);
 }
 
 @media(max-width: 800px) {
@@ -441,7 +439,7 @@ export default {
   font-size: 16px;
 }
 .shopping-cart .shopping-cart-items .item-price {
-  color: #6394F8;
+  color: #353030;;
   margin-left: 20px;
   margin-right: 8px;
 }
@@ -468,7 +466,7 @@ export default {
   float: left;
 }
 .button {
-  background: #6394F8;
+  background: #353030;
   color: white;
   text-align: center;
   padding: 12px;
@@ -479,7 +477,7 @@ export default {
   margin: 25px 0 15px 0;
 }
 .button:hover {
-  background: #729ef9;
+  background: #2e2b2b;
 }
 .clearfix:after {
   content: "";

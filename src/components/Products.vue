@@ -70,6 +70,7 @@ export default {
 .rp-container {
   display: flex;
   align-items: stretch;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -77,15 +78,15 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
-  flex: 1 16%;
-  background-image: linear-gradient(to right top, #fd1b2d, #dd1423, #bd0d1a, #9f0511, #820008);
+  justify-content: space-between;
+  /* background-image: linear-gradient(to right top, #fd1b2d, #dd1423, #bd0d1a, #9f0511, #820008); */
+  background-color: #2e2d2f;
   border-radius: 15px;
   margin: 10px;
-  height: auto;
+  width: 230px;
   box-shadow: 0px 12px 24px -12px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0px 12px 24px -12px rgba(0, 0, 0, 0.5);
- padding: 2%;
+  padding: 20px;
 }
 
 .rp-card a img {
@@ -133,7 +134,7 @@ export default {
   border: none;
   padding: 10px 25px;
   border-radius: 25px;
-  background-color: #850009;
+  background-color: #000103;
   color: #fff;
   margin-right: 17px;
 }
@@ -142,7 +143,7 @@ export default {
   border: none;
   padding: 10px;
   border-radius: 25px;
-  background-color: #850009;
+  background-color: #000103;
   color: #fff;
 }
 

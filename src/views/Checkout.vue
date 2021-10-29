@@ -84,17 +84,20 @@
       </div>
     </div> 
   </div>
+  <Footer />
 </template>
 
 <script>
 import Navbar from '../components/Navbar.vue'
+import Footer from '../components/Footer.vue'
 import { supabase } from '../supabase'
 import { ref, onBeforeMount, computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
   components: {
-    Navbar
+    Navbar,
+    Footer
   },
   setup() {
     const store = useStore()
@@ -159,7 +162,7 @@ export default {
   font-size: 16px;
 }
 .shopping-cart .shopping-cart-items .item-price {
-  color: #6394F8;
+  color: #353030;;
   margin-left: 20px;
   margin-right: 8px;
 }
@@ -173,7 +176,7 @@ export default {
   float: left;
 }
 .button {
-  background: #6394F8;
+  background: #353030;
   color: white;
   text-align: center;
   padding: 12px;
@@ -184,7 +187,7 @@ export default {
   margin: 25px 0 15px 0;
 }
 .button:hover {
-  background: #729ef9;
+  background: #2e2b2b;
 }
 .clearfix:after {
   content: "";
@@ -200,7 +203,7 @@ h1 {
     letter-spacing: -1px;
 }
 a {
-  color: #5469d4;
+  color: #353030;
   text-decoration: unset;
 }
 .login-root {
@@ -280,11 +283,11 @@ label {
 }
 
 input[type="submit"] {
-  background-color: rgb(84, 105, 212);
+  background-color: #353030;
   box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
               rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
               rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, 
-              rgb(84, 105, 212) 0px 0px 0px 1px, 
+              rgb(53, 48, 48) 0px 0px 0px 1px, 
               rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
               rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
               rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;

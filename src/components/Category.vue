@@ -3,6 +3,14 @@
     <h2>Categories</h2>
     <div class="category-body">
       <div class="cat">
+        <router-link to="/">
+          <div class="cat-img">
+            <img src="../assets/phone.png">
+          </div>
+          <p>All</p>
+        </router-link>
+      </div>
+      <div class="cat">
         <router-link to="/category/phones">
           <div class="cat-img">
             <img src="../assets/phone.png">
@@ -43,14 +51,6 @@
         </router-link>
       </div>
       <div class="cat">
-        <router-link to="/category/accessory">
-          <div class="cat-img">
-            <img src="../assets/wristwatch.png">
-          </div>
-          <p>Clothing Accessory</p>
-        </router-link>
-      </div>
-      <div class="cat">
         <router-link to="/category/fashion">
           <div class="cat-img">
             <img src="../assets/fashion.png">
@@ -81,6 +81,7 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .cat a {
@@ -100,7 +101,8 @@
   width: 120px;
   height: 120px;
   border-radius: 100px;
-  background-image: linear-gradient(to right top, #fd1b2d, #dd1423, #bd0d1a, #9f0511, #820008);
+  /* background-image: linear-gradient(to right top, #fd1b2d, #dd1423, #bd0d1a, #9f0511, #820008); */
+  background-color: #2e2d2f;
   justify-content: center;
   align-items: center;
   margin: 10px;

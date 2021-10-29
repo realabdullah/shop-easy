@@ -1,10 +1,10 @@
 <template>
   <div class="footer">
-      <h2>
-          <span>&#169;</span>
-          ShopEasy
-          <span>2021</span>
-        </h2>
+    <h3>
+      <span>&#169;</span>
+      ShopEasy
+      <span>2021</span>
+    </h3>
   </div>
 </template>
 
@@ -16,12 +16,12 @@ export default {
 
 <style scoped>
 .footer {
-    padding: 40px;
+    padding: 20px;
     background-color: #353030;
     text-align: center;
 }
 
-h2 {
+h3 {
     color: #fff;
 }
 

@@ -111,4 +111,10 @@
 .cat-img img {
   width: 70px;
 }
+
+@media(max-width: 800px) {
+  .category-cont {
+    margin-top: 50px;
+  }
+}
 </style>

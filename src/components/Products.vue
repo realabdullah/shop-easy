@@ -59,7 +59,6 @@ export default {
 <style>
 .products {
   margin-top: 20px;
-  /* margin-left: 300px; */
   padding: 30px;
 }
 
@@ -111,6 +110,7 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  font-size: 0.7rem;
 }
 
 .details .price {
@@ -128,6 +128,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0px -8px;
+  margin-top: 10px;
 }
 
 .details .buttons .view {
@@ -136,7 +138,7 @@ export default {
   border-radius: 25px;
   background-color: #000103;
   color: #fff;
-  margin-right: 17px;
+  margin-right: 7px;
 }
 
 .details .buttons .add-cart {
@@ -154,12 +156,17 @@ a {
 
 @media(max-width: 800px) {
   .products {
-    margin-top: 70px;
+    margin-top: 20px;
     padding: 10px;
   }
 
   .recommended h2 {
     margin-bottom: 10px;
+  }
+
+  .rp-card {
+    width: 150px;
+    padding: 20px;
   }
 }
 </style>

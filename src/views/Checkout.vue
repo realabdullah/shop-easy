@@ -3,7 +3,7 @@
   <div class="checkout-cont">
     <div class="shopping-cart">
       <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-        <h1>Your Cart</h1>
+        <h1>Your Cart ({{cart.length}})</h1>
       </div>
       <ul class="shopping-cart-items">
         <li class="clearfix" v-for="item in cart" :key="item.id">

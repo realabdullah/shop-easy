@@ -49,7 +49,7 @@ export default createStore({
     getTotal: state => {
       let total = 0
       state.cart.map((p) => {
-        total += p.price*p.quantity
+        total += p.price
       })
       return total
     },

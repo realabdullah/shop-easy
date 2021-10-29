@@ -1,14 +1,14 @@
 <template>
   <div class="products">
     <div class="recommended">
-      <h2>Recommended Products</h2>
+      <h2>All Products</h2>
       <div class="rp-container">
         <div class="rp-card" v-for="product in products" :key="product.id">
           <router-link :to="{ name: 'Product', params: { name: product.name }}">
             <img :src="product.file" alt="headset">
           </router-link>
             <div class="details">
-              <p class="price">${{ product.price }}</p>
+              <p class="price"><span> &#8358; </span>{{ product.price.toLocaleString() }}</p>
               <p class="name">{{ product.name }}</p>
               <div class="buttons">
                 <button class="view">
@@ -58,7 +58,7 @@ export default {
 
 <style>
 .products {
-  margin-top: 300px;
+  margin-top: 20px;
   /* margin-left: 300px; */
   padding: 30px;
 }
@@ -147,6 +147,7 @@ export default {
 }
 
 a {
+  color: #fff;
   text-decoration: none;
 }
 

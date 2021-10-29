@@ -14,6 +14,41 @@ const routes = [
     component: () => import('../views/ProductPage.vue')
   },
   {
+    path: '/checkout',
+    name: 'Checkout',
+    component: () => import('../views/Checkout.vue')
+  },
+  {
+    path: '/category/accessory',
+    name: 'Accessory',
+    component: () => import('../views/Accessorycart.vue')
+  },
+  {
+    path: '/category/computers',
+    name: 'Computers',
+    component: () => import('../views/Computercat.vue')
+  },
+  {
+    path: '/category/electronics',
+    name: 'Electronics',
+    component: () => import('../views/Electronicscart.vue')
+  },
+  {
+    path: '/category/fashion',
+    name: 'Fashion',
+    component: () => import('../views/Fashioncart.vue')
+  },
+  {
+    path: '/category/phones',
+    name: 'Phones',
+    component: () => import('../views/Phonescat.vue')
+  },
+  {
+    path: '/category/shoes',
+    name: 'Shoes',
+    component: () => import('../views/Shoescart.vue')
+  },
+  {
     path: '/admin-board',
     name: 'Admin Board',
     component: () => import('../views/AdminBoard.vue'),

@@ -37,11 +37,32 @@
     </div>
   </div>
 
+  <div class="review">
+    <h3>Make a review</h3>
+    <form @submit.prevent="sendReview">
+      <textarea cols="30" rows="5" v-model="dReview"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+
+    <div class="reviews">
+      <div class="reviewdata" v-for="review in reviewsCon" :key="review.uid" v-if="reviewsCon.length">
+        <li>
+          {{ review.review }}
+          <span>{{ review.created_at }}</span>
+        </li>
+      </div>
+
+      <div class="empty" v-else>
+        <p>No reviews on this product yet!</p>
+      </div>
+    </div>
+  </div>
+
   <Footer />
 </template>
 
 <script>
-import { ref, reactive, computed, onBeforeMount } from 'vue'
+import { ref, reactive, computed, onBeforeMount, onUpdated } from 'vue'
 import { useRoute } from 'vue-router'
 import { supabase } from '../supabase'
 import Navbar from '../components/Navbar.vue'
@@ -58,8 +79,11 @@ export default {
     const route = useRoute()
     const singleProductName = computed(() => route.params.name)
     const productInfoHolder = ref([])
+    const dReview = ref('')
+    const reviewsCon = ref([])
 
     const productInfo = reactive({
+      id: '',
       file: '',
       name: '',
       description: '',
@@ -72,6 +96,25 @@ export default {
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
 
+    const sendReview = async () => {
+      try {
+        const productReview = dReview.value
+        const { data, error } = await supabase
+        .from('reviews')
+        .insert([
+          { id: productInfo.id, review: productReview }
+        ])
+          dReview.value = ''
+        if (error) {
+          alert(error.message)
+          console.error('There was an error inserting', error)
+          return null
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
     const getProductInfo = async () => {
       try {
         const data = await supabase
@@ -80,6 +123,7 @@ export default {
         .eq('name', singleProductName.value)
         .single()
         const newDetails = productInfoHolder.value = data.data
+        productInfo.id = newDetails.id,
         productInfo.name = newDetails.name,
         productInfo.description = newDetails.description,
         productInfo.price = newDetails.price,
@@ -87,6 +131,19 @@ export default {
         productInfo.available = newDetails.available
       }
       catch(error) {
+        console.log(error)
+      }
+    }
+
+    const getReviews = async () => {
+      try {
+        const revId = productInfo.id
+        const { data: reviews, error } = await supabase
+        .from('reviews')
+        .select('*')
+        .eq('id', revId)
+        reviewsCon.value = reviews
+      } catch (error) {
         console.log(error)
       }
     }
@@ -100,10 +157,21 @@ export default {
       getProductInfo()
     })
 
+    // onMounted(() => {
+    //   getReviews()
+    // })
+
+    onUpdated(() => {
+      getReviews()
+    })
+
     return {
       productInfo,
       addProduct,
-      formatPrice
+      formatPrice,
+      sendReview,
+      dReview,
+      reviewsCon
     }
   }
 }
@@ -251,6 +319,51 @@ export default {
   display: none;
 }
 
+.review {
+  margin: 40px;
+}
+
+.review form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.review form textarea {
+  padding: 10px;
+  outline: none;
+  resize: none;
+  margin-bottom: 15px;
+  border-radius: 7px;
+}
+
+.review form button {
+  padding: 10px;
+  border: none;
+  border-radius: 7px;
+  background-color: rgb(46, 45, 47);
+  color: #fff;
+}
+
+.reviews {
+  margin: 40px;
+}
+
+.reviewdata {
+  padding: 10px;
+}
+
+.reviewdata li {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewdata li span {
+  margin-top: 5px;
+  font-size: 0.6rem;
+}
+
 @media(max-width: 800px) {
   .ccard {
     display: flex;
@@ -260,6 +373,10 @@ export default {
   .product-desc {
     display: flex;
     flex-direction: column;
+  }
+
+  .reviews {
+    margin: 20px;
   }
 }
 

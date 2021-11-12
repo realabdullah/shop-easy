@@ -8,7 +8,7 @@
             <img :src="product.file" alt="headset">
           </router-link>
             <div class="details">
-              <p class="price"><span> &#8358; </span>{{ product.price.toLocaleString() }}</p>
+              <p class="price"><span> &#8358; </span>{{ formatPrice(product.price) }}</p>
               <p class="name">{{ product.name }}</p>
               <div class="buttons">
                 <button class="view">
@@ -44,13 +44,20 @@ export default {
       store.dispatch("addProduct", product);
     }
 
+    
+    function formatPrice(value) {
+      let val = (value/1).toFixed(2).replace(',', '.')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    }
+
     onBeforeMount(() => {
       getProduct()
     })
 
     return {
       addProduct,
-      products: computed(() => store.getters.getProducts)
+      products: computed(() => store.getters.getProducts),
+      formatPrice
     }
   }
 }

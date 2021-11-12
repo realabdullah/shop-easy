@@ -48,7 +48,7 @@
       <div class="reviewdata" v-for="review in reviewsCon" :key="review.uid" v-if="reviewsCon.length">
         <li>
           {{ review.review }}
-          <span>{{ review.created_at }}</span>
+          <span>{{ dateTime(review.created_at) }}</span>
         </li>
       </div>
 
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import { ref, reactive, computed, onBeforeMount, onUpdated } from 'vue'
 import { useRoute } from 'vue-router'
 import { supabase } from '../supabase'
@@ -94,6 +95,10 @@ export default {
     function formatPrice(value) {
       let val = (value/1).toFixed(2).replace(',', '.')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    }
+
+    function dateTime(value) {
+      return moment(value).format('llll')
     }
 
     const sendReview = async () => {
@@ -171,7 +176,8 @@ export default {
       formatPrice,
       sendReview,
       dReview,
-      reviewsCon
+      reviewsCon,
+      dateTime
     }
   }
 }

@@ -172,7 +172,7 @@
             <span class="cart-no">{{ cart.length }}</span>
           </p>
         </li>
-        <!-- <li>
+        <li>
           <router-link to="/" v-if="user">
             <button class="login">
               Dashboard
@@ -184,7 +184,7 @@
               Create account
             </button>
           </router-link>
-        </li> -->
+        </li>
       </nav>
     </div>
   </div>
@@ -343,16 +343,18 @@ export default {
 .navbar-nav nav li a .login {
   border: none;
   outline: none;
-  padding: 10px 20px;
+  padding: 7px 13px;
   border-radius: 10px;
-  background: #4438d6;
-  color: #fff;
-  font-size: 18px;
+  background: #fff;
+  color: rgb(53, 48, 48);
+  font-size: 0.7rem;
+  margin-left: 15px;
 }
 
 .navbar-nav nav li a .login:hover {
   cursor: pointer;
-  background: #1601fd;
+  background: rgb(53, 48, 48);
+  color: #fff;
 }
 
 .bag {

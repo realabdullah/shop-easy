@@ -104,7 +104,7 @@ router.beforeEach((to, from, next) => {
   (record => record.meta.requiresAuth)
 
   if(requiresAuth && !currentUser) next('/sign-in')
-  else if(!requiresAuth && currentUser) next("/admin-board");
+  else if(!requiresAuth && currentUser) next("/");
   else next();
 })
 

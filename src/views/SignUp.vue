@@ -1,5 +1,5 @@
 <template>
-  <Navbar :user="user" />
+  <Navbar :curUser="curUser" />
   <div class="login-root">
     <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
       <div class="loginbackground box-background--white padding-top--64">
@@ -87,6 +87,7 @@ export default {
     const email = ref('')
     const password = ref('')
     const registered = ref(false)
+    const curUser = ref()
 
     const signUp = async () => {
       try {
@@ -95,7 +96,8 @@ export default {
           password: password.value,
         })
         registered.value = true
-        console.log(user)
+        curUser.value = user
+        console.log(curUser)
       }
       catch(error) {
         console.log('Error signing up!')
@@ -103,7 +105,7 @@ export default {
     }
     
     return {
-      user,
+      curUser,
       email,
       password,
       signUp,

@@ -173,7 +173,7 @@
           </p>
         </li>
         <li>
-          <router-link to="/" v-if="user">
+          <router-link to="/" v-if="curUser">
             <button class="login">
               Dashboard
             </button>
@@ -217,7 +217,7 @@ import { useStore } from 'vuex'
 
 export default {
   props: [
-    'user'
+    'curUser'
   ],
   setup(props) {
     const store = useStore()
@@ -237,12 +237,11 @@ export default {
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
 
-    onBeforeMount(() => {
-      console.log(props.user)
-    })
+    // onBeforeMount(() => {
+    //   console.log(props.user)
+    // })
 
     return {
-      session,
       cart: computed(() => store.getters.getCart),
       total: computed(() => store.getters.getTotal),
       cartOpen,

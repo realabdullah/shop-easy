@@ -216,9 +216,12 @@ import { ref, onBeforeMount, computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
-  setup() {
+  props: [
+    'user'
+  ],
+  setup(props) {
     const store = useStore()
-    const user = supabase.auth.user()
+    const session = supabase.auth.session()
     const cartOpen = ref(true)
 
     const openCart = () => {
@@ -234,13 +237,12 @@ export default {
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
 
-    // onBeforeMount(() => {
-      
-    //   }
-    // })
+    onBeforeMount(() => {
+      console.log(props.user)
+    })
 
     return {
-      user,
+      session,
       cart: computed(() => store.getters.getCart),
       total: computed(() => store.getters.getTotal),
       cartOpen,

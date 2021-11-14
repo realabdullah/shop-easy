@@ -12,7 +12,7 @@
               <p class="name">{{ product.name }}</p>
               <div class="buttons">
                 <button class="view">
-                  <router-link :to="{ name: 'Product', params: { name: product.name }}">
+                  <router-link :to="`/product/${product.name}`">
                     View
                   </router-link>
                 </button>

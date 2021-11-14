@@ -107,7 +107,7 @@ router.beforeEach((to, from, next) => {
     next('/sign-in')
   }
   else if(!requiresAuth && currentUser) {
-    next("/");
+    next('/category/shoes');
   }
   else {
     next();

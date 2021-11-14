@@ -4,7 +4,7 @@
       <h2>All Products</h2>
       <div class="rp-container">
         <div class="rp-card" v-for="product in products" :key="product.id">
-          <router-link :to="{ name: 'Product', params: { name: product.name }}">
+          <router-link :to="`/product/${product.name}`">
             <img :src="product.file" alt="headset">
           </router-link>
             <div class="details">

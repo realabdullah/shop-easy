@@ -97,10 +97,10 @@ export default {
         })
         registered.value = true
         curUser.value = user
-        console.log(curUser)
+        // console.log(curUser)
       }
       catch(error) {
-        console.log('Error signing up!')
+        // console.log('Error signing up!')
       }
     }
     

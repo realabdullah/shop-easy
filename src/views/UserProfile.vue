@@ -13,6 +13,9 @@
     <p></p>
 
   </div>
+  <button @click="logOut">
+    Log Out
+  </button>
   <Footer />
 </template>
 
@@ -63,13 +66,23 @@ export default {
       }
     }
 
+    const logOut = () => {
+      try {
+        const { error } = supabase.auth.signOut()
+      }
+      catch(error) {
+        console.log(error)
+      }
+    }
+
     onBeforeMount(() => {
       getUserInfo()
       const user = supabase.auth.user()
     })
 
     return {
-      userInfo
+      userInfo,
+      logOut
     }
   }
 }

@@ -189,9 +189,6 @@
               Profile
             </button>
           </router-link>
-          <button @click="logOut" class="login" v-if="user">
-            logout
-          </button>
         </li>
       </nav>
     </div>
@@ -240,15 +237,6 @@ export default {
       cartOpen.value = true
     }
 
-    const logOut = () => {
-      try {
-        const { error } = supabase.auth.signOut()
-      }
-      catch(error) {
-        console.log(error)
-      }
-    }
-
     function formatPrice(value) {
       let val = (value/1).toFixed(2).replace(',', '.')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -265,7 +253,6 @@ export default {
       openCart,
       closeCart,
       formatPrice,
-      logOut,
       user
     }
   }

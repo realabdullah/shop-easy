@@ -184,6 +184,11 @@
               Create account
             </button>
           </router-link>
+          <router-link :to="`/user/${user.user_metadata.first_name}`" v-if="user">
+            <button class="login">
+              Profile
+            </button>
+          </router-link>
           <button @click="logOut" class="login" v-if="user">
             logout
           </button>
@@ -238,7 +243,6 @@ export default {
     const logOut = () => {
       try {
         const { error } = supabase.auth.signOut()
-        console.log('signed out!')
       }
       catch(error) {
         console.log(error)
@@ -250,9 +254,9 @@ export default {
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
 
-    // onBeforeMount(() => {
-    //   console.log(props.user)
-    // })
+    onBeforeMount(() => {
+      const user = supabase.auth.user()
+    })
 
     return {
       cart: computed(() => store.getters.getCart),

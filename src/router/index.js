@@ -14,6 +14,11 @@ const routes = [
     component: () => import('../views/ProductPage.vue')
   },
   {
+    path: '/user/:id',
+    name: 'User Profile',
+    component: () => import('../views/UserProfile.vue')
+  },
+  {
     path: '/checkout',
     name: 'Checkout',
     component: () => import('../views/Checkout.vue')
@@ -89,12 +94,7 @@ const routes = [
     path: '/sign-in',
     name: 'Sign In',
     component: () => import('../views/SignIn.vue')
-  },
-  {
-    path: '/user',
-    name: 'User Profile',
-    component: () => import('../views/UserProfile.vue')
-  },
+  }
 ]
 
 const router = createRouter({

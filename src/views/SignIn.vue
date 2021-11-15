@@ -39,10 +39,14 @@
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
               <span class="padding-bottom--15">Sign in to your account</span>
-              <form id="stripe-login" @submit.prevent="signIn" v-if="!signed">
+              <form id="stripe-login" @submit.prevent="signIn">
                 <div class="field padding-bottom--24">
                   <label for="email">Email</label>
                   <input type="email" name="email" v-model="email">
+                </div>
+                <div class="field padding-bottom--24">
+                  <label for="password">Password</label>
+                  <input type="password" name="password" v-model="password">
                 </div>
                 <div class="field padding-bottom--24">
                   <button class="submit">Sign In</button>
@@ -51,9 +55,6 @@
                   <p class="ssolink" @click="googleSignIn">Use single sign-on (Google) instead</p>
                 </div>
               </form>
-              <div id="stripe-login" v-else>
-                <p>Please check your mail for magic link to sign in.</p>
-              </div>
             </div>
           </div>
           <div class="footer-link padding-top--24">
@@ -69,21 +70,24 @@
 import Navbar from '../components/Navbar.vue'
 import { supabase } from '../supabase'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
   components: {
     Navbar
   },
   setup() {
+    const router = useRouter()
     const email = ref('')
-    const signed = ref(false)
+    const password = ref('')
 
     const signIn = async () => {
       try {
         const { user, session, error } = await supabase.auth.signIn({
-          email: email.value
+          email: email.value,
+          password: password.value
         })
-        signed.value = true
+        router.push('/')
       }
       catch(error) {
         console.log('Error signing in!')
@@ -95,16 +99,15 @@ export default {
         const { user, error } = await supabase.auth.signIn({
           provider: 'google'
         })
-        console.log(user)
       }
       catch(error) {
-        console.log(error)
+        // console.log(error)
       }
     }
     
     return {
       email,
-      signed,
+      password,
       signIn,
       googleSignIn
     }

@@ -39,7 +39,19 @@
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
               <span class="padding-bottom--15">Create an account</span>
-              <form id="stripe-login" @submit.prevent="signUp" v-if="!registered">
+              <form id="stripe-login" @submit.prevent="signUp">
+                <div class="field padding-bottom--24">
+                  <label for="username">Username</label>
+                  <input type="text" name="username" v-model="username">
+                </div>
+                <div class="field padding-bottom--24">
+                  <label for="first-name">First Name</label>
+                  <input type="text" name="first-name" v-model="first_name">
+                </div>
+                <div class="field padding-bottom--24">
+                  <label for="last-name">Last Name</label>
+                  <input type="text" name="last-name" v-model="last_name">
+                </div>
                 <div class="field padding-bottom--24">
                   <label for="email">Email</label>
                   <input type="email" name="email" v-model="email">
@@ -54,15 +66,24 @@
                   <input type="password" name="password" v-model="password">
                 </div>
                 <div class="field padding-bottom--24">
+                  <label for="phone">Mobile Number</label>
+                  <input type="telephone" name="phone" v-model="phone">
+                </div>
+                <div class="field padding-bottom--24">
+                  <label for="country">Country</label>
+                  <input type="text" name="country" v-model="country">
+                </div>
+                <div class="field padding-bottom--24">
+                  <label for="state">State</label>
+                  <input type="text" name="state" v-model="state">
+                </div>
+                <div class="field padding-bottom--24">
                   <button class="submit">Sign Up</button>
                 </div>
                 <div class="field">
                   <a class="ssolink" href="#">Use single sign-on (Google) instead</a>
                 </div>
               </form>
-              <div id="stripe-login" v-else>
-                <p>Please check your mail for magic link to complete account registration.</p>
-              </div>
             </div>
           </div>
           <div class="footer-link padding-top--24">
@@ -78,38 +99,86 @@
 import Navbar from '../components/Navbar.vue'
 import { supabase } from '../supabase'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
   components: {
     Navbar
   },
   setup() {
+    const router = useRouter()
     const email = ref('')
     const password = ref('')
-    const registered = ref(false)
+    const username = ref('')
+    const first_name = ref('')
+    const last_name = ref('')
+    const phone = ref('')
+    const country = ref('')
+    const state = ref('')
     const curUser = ref()
 
     const signUp = async () => {
       try {
-        const { user, session, error } = await supabase.auth.signUp({
-          email: email.value,
-          password: password.value,
-        })
-        registered.value = true
-        curUser.value = user
+        const { user, session, error } = await supabase.auth.signUp(
+          {
+            email: email.value,
+            password: password.value,
+          },
+          {
+            data: {
+              first_name: first_name.value,
+              last_name: last_name.value,
+              phone: phone.value,
+              country: country.value,
+              state: state.value
+            }
+          }
+        )
+        curUser.value = user.id
         // console.log(curUser)
+        pushMeta()
+        router.push('/sign-in')
       }
       catch(error) {
         // console.log('Error signing up!')
       }
     }
+
+    const pushMeta = async () => {
+      try {
+        const metaId = curUser.value
+        const { data, error } = await supabase
+        .from('profiles')
+        .insert([
+          {
+            id: metaId,
+            username: username.value,
+            email: email.value,
+            password: password.value,
+            first_name: first_name.value,
+            last_name: last_name.value,
+            phone: phone.value,
+            country: country.value,
+            state: state.value
+          },
+        ])
+      }
+      catch(error) {
+        // console.log(error)
+      }
+    }
     
     return {
+      username,
       curUser,
       email,
       password,
       signUp,
-      registered
+      first_name,
+      last_name,
+      phone,
+      country,
+      state
     }
   }
 }

@@ -184,6 +184,9 @@
               Create account
             </button>
           </router-link>
+          <button @click="logOut" class="login" v-if="user">
+            logout
+          </button>
         </li>
       </nav>
     </div>
@@ -219,9 +222,9 @@ export default {
   props: [
     'curUser'
   ],
-  setup(props) {
+  setup() {
     const store = useStore()
-    const session = supabase.auth.session()
+    const user = supabase.auth.user()
     const cartOpen = ref(true)
 
     const openCart = () => {
@@ -230,6 +233,16 @@ export default {
 
     const closeCart = () => {
       cartOpen.value = true
+    }
+
+    const logOut = () => {
+      try {
+        const { error } = supabase.auth.signOut()
+        console.log('signed out!')
+      }
+      catch(error) {
+        console.log(error)
+      }
     }
 
     function formatPrice(value) {
@@ -247,7 +260,9 @@ export default {
       cartOpen,
       openCart,
       closeCart,
-      formatPrice
+      formatPrice,
+      logOut,
+      user
     }
   }
 }

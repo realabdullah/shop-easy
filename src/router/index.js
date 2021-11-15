@@ -51,34 +51,34 @@ const routes = [
   {
     path: '/admin-board',
     name: 'Admin Board',
-    component: () => import('../views/AdminBoard.vue'),
-    meta: {
-      requiresAuth: true,
-    }
+    component: () => import('../views/AdminBoard.vue')
+    // meta: {
+    //   requiresAuth: true,
+    // }
   },
   {
     path: '/admin-board/add-product',
     name: 'Add Product',
-    component: () => import('../components/AddProduct.vue'),
-    meta: {
-      requiresAuth: true,
-    }
+    component: () => import('../components/AddProduct.vue')
+    // meta: {
+    //   requiresAuth: true,
+    // }
   },
   {
     path: '/admin-board/update-product/:name',
     name: 'Update Product',
-    component: () => import('../components/UpdateProduct.vue'),
-    meta: {
-      requiresAuth: true,
-    }
+    component: () => import('../components/UpdateProduct.vue')
+    // meta: {
+    //   requiresAuth: true,
+    // }
   },
   {
     path: '/admin-board/view-products',
     name: 'View Products',
-    component: () => import('../components/ViewProducts.vue'),
-    meta: {
-      requiresAuth: true,
-    }
+    component: () => import('../components/ViewProducts.vue')
+    // meta: {
+    //   requiresAuth: true,
+    // }
   },
   {
     path: '/sign-up',
@@ -89,7 +89,12 @@ const routes = [
     path: '/sign-in',
     name: 'Sign In',
     component: () => import('../views/SignIn.vue')
-  }
+  },
+  {
+    path: '/user',
+    name: 'User Profile',
+    component: () => import('../views/UserProfile.vue')
+  },
 ]
 
 const router = createRouter({
@@ -97,21 +102,21 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  // get current user info
-  const currentUser = supabase.auth.user()
-  const requiresAuth = to.matched.some
-  (record => record.meta.requiresAuth)
+// router.beforeEach((to, from, next) => {
+//   // get current user info
+//   const currentUser = supabase.auth.user()
+//   const requiresAuth = to.matched.some
+//   (record => record.meta.requiresAuth)
 
-  if(requiresAuth && !currentUser) {
-    next('/sign-in')
-  }
-  else if(!requiresAuth && currentUser) {
-    next('/category/shoes');
-  }
-  else {
-    next();
-  }
-})
+//   if(requiresAuth && !currentUser) {
+//     next('/sign-in')
+//   }
+//   else if(!requiresAuth && currentUser) {
+//     next('/category/shoes');
+//   }
+//   else {
+//     next();
+//   }
+// })
 
 export default router

@@ -95,6 +95,7 @@ export default {
         const { user, error } = await supabase.auth.signIn({
           provider: 'google'
         })
+        console.log(user)
       }
       catch(error) {
         console.log(error)

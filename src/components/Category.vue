@@ -112,8 +112,8 @@
 }
 
 @media(max-width: 800px) {
-  .category-cont {
+  /* .category-cont {
     margin-top: 50px;
-  }
+  } */
 }
 </style>

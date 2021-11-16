@@ -35,8 +35,8 @@ export default {
     margin-top: 60px;
   } */
 
-  .carousel-img {
+  /* .carousel-img {
     height: 255px;
-  }
+  } */
 }
 </style>

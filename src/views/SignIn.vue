@@ -105,16 +105,13 @@ export default {
     const signIn = async () => {
       try {
         loading.value = true
-        console.log(loading.value)
         const { user, session, error } = await supabase.auth.signIn({
           email: email.value,
           password: password.value
         })
         loading.value = false
-        console.log(loading.value)
         if(user && session) {
           router.push('/')
-          console.log(session)
         }
         else {
           incorrect.value = true

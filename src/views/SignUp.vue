@@ -80,8 +80,25 @@
                   <label for="state">State</label>
                   <input type="text" name="state" v-model="state">
                 </div>
-                <div class="field padding-bottom--24">
-                  <button class="submit">Sign Up</button>
+                <div class="field padding-bottom--24"><button class="submi" v-if="loading">
+                    <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+                      <g fill="none" fill-rule="evenodd">
+                        <g transform="translate(1 1)" stroke-width="2">
+                          <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
+                          <path d="M36 18c0-9.94-8.06-18-18-18">
+                            <animateTransform
+                                attributeName="transform"
+                                type="rotate"
+                                from="0 18 18"
+                                to="360 18 18"
+                                dur="1s"
+                                repeatCount="indefinite"/>
+                          </path>
+                        </g>
+                    </g>
+                  </svg>
+                  </button>
+                  <button class="submit" v-else>Sign Up</button>
                 </div>
                 <!-- <div class="field">
                   <a class="ssolink" href="#">Use single sign-on (Google) instead</a>
@@ -116,9 +133,11 @@ export default {
     const country = ref('')
     const state = ref('')
     const curUser = ref()
+    const loading = ref(false)
 
     const signUp = async () => {
       try {
+        loading.value = true
         const { user, session, error } = await supabase.auth.signUp(
           {
             email: email.value,
@@ -134,6 +153,7 @@ export default {
             }
           }
         )
+        loading.value = false
         curUser.value = user.id
         pushMeta()
         router.push('/sign-in')
@@ -177,7 +197,8 @@ export default {
       last_name,
       phone,
       country,
-      state
+      state,
+      loading
     }
   }
 }

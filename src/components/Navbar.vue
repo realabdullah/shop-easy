@@ -239,7 +239,6 @@ export default {
 
     onBeforeMount(() => {
       const user = supabase.auth.user()
-      console.log(user)
     })
 
     return {

@@ -25,6 +25,22 @@
       </div>
     </div>
 
+    <div class="settings">
+      <h2>Account Settings</h2>
+      <div class="adetails">
+        <li>
+          <router-link :to="`/edit/${userInfo.first_name}`">
+            Edit Profile
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/sign-up">
+            Change Password
+          </router-link>
+        </li>
+      </div>
+    </div>
+
     <div class="cart">
       <div class="shopping-cart">
         <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">

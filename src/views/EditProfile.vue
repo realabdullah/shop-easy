@@ -35,50 +35,44 @@
         </div>
       </div>
       <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
-        <div class="footer-link padding-top--24">
-          <span>Already have an account? <router-link to="/sign-in">Sign In</router-link></span>
-        </div>
         <div class="formbg-outer">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
-              <span class="padding-bottom--15">Create an account</span>
-              <form id="stripe-login" @submit.prevent="signUp">
-                <div class="field padding-bottom--24">
+              <span class="padding-bottom--15">Update Profile</span>
+              <form id="stripe-login" @submit.prevent="updateProfile">
+                <!-- <div class="field padding-bottom--24">
                   <label for="username">Username</label>
                   <input type="text" name="username" v-model="username">
-                </div>
+                </div> -->
                 <div class="field padding-bottom--24">
                   <label for="first-name">First Name</label>
-                  <input type="text" name="first-name" v-model="first_name">
+                  <input type="text" name="first-name" v-model="profileUpdate.first_name">
                 </div>
                 <div class="field padding-bottom--24">
                   <label for="last-name">Last Name</label>
-                  <input type="text" name="last-name" v-model="last_name">
+                  <input type="text" name="last-name" v-model="profileUpdate.last_name">
                 </div>
-                <div class="field padding-bottom--24">
+                <!-- <div class="field padding-bottom--24">
                   <label for="email">Email</label>
-                  <input type="email" name="email" v-model="email">
-                </div>
-                <div class="field padding-bottom--24">
+                  <input type="email" name="email" v-model="profileUpdate.email">
+                </div> -->
+                <!-- <div class="field padding-bottom--24">
                   <div class="grid--50-50">
                     <label for="password">Password</label>
-                    <!-- <div class="reset-pass">
-                      <a href="#">Forgot your password?</a>
-                    </div> -->
                   </div>
                   <input type="password" name="password" v-model="password">
-                </div>
+                </div> -->
                 <div class="field padding-bottom--24">
                   <label for="phone">Mobile Number</label>
-                  <input type="telephone" name="phone" v-model="phone">
+                  <input type="telephone" name="phone" v-model="profileUpdate.phone">
                 </div>
                 <div class="field padding-bottom--24">
                   <label for="country">Country</label>
-                  <input type="text" name="country" v-model="country">
+                  <input type="text" name="country" v-model="profileUpdate.country">
                 </div>
                 <div class="field padding-bottom--24">
                   <label for="state">State</label>
-                  <input type="text" name="state" v-model="state">
+                  <input type="text" name="state" v-model="profileUpdate.state">
                 </div>
                 <div class="field padding-bottom--24"><button class="submi" v-if="loading">
                     <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
@@ -98,11 +92,11 @@
                     </g>
                   </svg>
                   </button>
-                  <button class="submit" v-else>Sign Up</button>
+                  <button class="submit" v-else>Update</button>
                 </div>
-                <!-- <div class="field">
-                  <a class="ssolink" href="#">Use single sign-on (Google) instead</a>
-                </div> -->
+                <div class="field padding-bottom--24" v-if="updated">
+                  <p class="updated">Profile updated successfully.</p>
+                </div>
               </form>
             </div>
           </div>
@@ -116,8 +110,8 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
+import { reactive, ref, onBeforeMount } from 'vue'
 import { supabase } from '../supabase'
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 export default {
@@ -127,81 +121,71 @@ export default {
   },
   setup() {
     const router = useRouter()
-    const email = ref('')
-    const password = ref('')
-    const username = ref('')
-    const first_name = ref('')
-    const last_name = ref('')
-    const phone = ref('')
-    const country = ref('')
-    const state = ref('')
-    const curUser = ref()
+    const profileUpdateData = ref([])
+    const user = supabase.auth.user()
     const loading = ref(false)
+    const updated = ref(false)
 
-    const signUp = async () => {
+    const profileUpdate = reactive({
+      first_name: '',
+      last_name: '',
+      phone: '',
+      country: '',
+      state: ''
+    })
+
+    const getProfileForUpdate = async () => {
+      try {
+        const data = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single()
+        const readyUpdate = profileUpdateData.value = data.data
+        profileUpdate.first_name = readyUpdate.first_name,
+        profileUpdate.last_name = readyUpdate.last_name,
+        profileUpdate.phone = readyUpdate.phone,
+        profileUpdate.country = readyUpdate.country,
+        profileUpdate.state = readyUpdate.state
+        console.log(readyUpdate)
+      }
+      catch (err) {
+        alert('Error')
+        console.error('Unknown problem getting productUpdateData', err)
+        return null
+      }
+    }
+
+    const updateProfile = async () => {
       try {
         loading.value = true
-        const { user, session, error } = await supabase.auth.signUp(
-          {
-            email: email.value,
-            password: password.value,
-          },
-          {
-            data: {
-              first_name: first_name.value,
-              last_name: last_name.value,
-              phone: phone.value,
-              country: country.value,
-              state: state.value
-            }
-          }
-        )
+        let { error } = await supabase
+        .from('profiles')
+        .update({
+          first_name: profileUpdate.first_name,
+          last_name: profileUpdate.last_name,
+          phone: profileUpdate.phone,
+          country: profileUpdate.country,
+          state: profileUpdate.state
+        })
+        .eq('id', user.id)
+        .single()
         loading.value = false
-        curUser.value = user.id
-        pushMeta()
-        router.push('/sign-in')
-      }
-      catch(error) {
-        // console.log('Error signing up!')
+        updated.value = true
+      } catch (error) {
+        alert(error.message)
       }
     }
 
-    const pushMeta = async () => {
-      try {
-        const metaId = curUser.value
-        const { data, error } = await supabase
-        .from('profiles')
-        .insert([
-          {
-            id: metaId,
-            username: username.value,
-            email: email.value,
-            password: password.value,
-            first_name: first_name.value,
-            last_name: last_name.value,
-            phone: phone.value,
-            country: country.value,
-            state: state.value
-          },
-        ])
-      }
-      catch(error) {
-        // console.log(error)
-      }
-    }
-    
+    onBeforeMount(() => {
+      getProfileForUpdate()
+    })
+
     return {
-      username,
-      curUser,
-      email,
-      password,
-      signUp,
-      first_name,
-      last_name,
-      phone,
-      country,
-      state,
-      loading
+      profileUpdate,
+      updateProfile,
+      loading,
+      updated
     }
   }
 }
@@ -237,9 +221,6 @@ a {
 .login-root {
     background: #fff;
     display: flex;
-    width: 100%;
-    min-height: 100vh;
-    overflow: hidden;
     margin-top: 90px;
 }
 .loginbackground {
@@ -404,9 +385,8 @@ label {
     align-items: center;
     margin: 0;
 }
-a.ssolink {
-    display: block;
-    text-align: center;
+.updated {
+    color: #008000;
     font-weight: 600;
 }
 .footer-link span {

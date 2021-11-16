@@ -16,13 +16,13 @@ export default {
 
 <style scoped>
 .footer {
-    padding: 20px;
-    background-color: #353030;
-    text-align: center;
+  padding: 20px;
+  background-color: #353030;
+  text-align: center;
 }
 
-h3 {
-    color: #fff;
+.footer h3 {
+  color: #fff;
 }
 
 </style>

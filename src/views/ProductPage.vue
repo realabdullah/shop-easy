@@ -41,14 +41,20 @@
     <h3>Make a review</h3>
     <form @submit.prevent="sendReview">
       <textarea cols="30" rows="5" v-model="dReview"></textarea>
+      <p class="error" v-if="!reviewPos">You need to login to make a review.</p>
       <button type="submit">Submit</button>
     </form>
 
     <div class="reviews">
+      <p>Reviews</p>
       <div class="reviewdata" v-for="review in reviewsCon" :key="review.uid" v-if="reviewsCon.length">
+        
         <li>
           {{ review.review }}
-          <span>{{ dateTime(review.created_at) }}</span>
+          <span>by 
+            <span class="bold">
+              {{ review.username }}
+            </span>  on {{ dateTime(review.created_at) }}</span>
         </li>
       </div>
 
@@ -76,12 +82,15 @@ export default {
     Footer
   },
   setup() {
+    const user = supabase.auth.user()
+    const session = supabase.auth.session()
     const store = useStore()
     const route = useRoute()
     const singleProductName = computed(() => route.params.name)
     const productInfoHolder = ref([])
     const dReview = ref('')
     const reviewsCon = ref([])
+    const reviewPos = ref(true)
 
     const productInfo = reactive({
       id: '',
@@ -102,21 +111,22 @@ export default {
     }
 
     const sendReview = async () => {
-      try {
-        const productReview = dReview.value
-        const { data, error } = await supabase
-        .from('reviews')
-        .insert([
-          { id: productInfo.id, review: productReview }
-        ])
-          dReview.value = ''
-        if (error) {
-          alert(error.message)
-          console.error('There was an error inserting', error)
-          return null
+      if(user && session) {
+        try {
+          const userAuthor = user.user_metadata.first_name
+          const productReview = dReview.value
+          const { data, error } = await supabase
+          .from('reviews')
+          .insert([
+            { id: productInfo.id, review: productReview, username: userAuthor}
+          ])
+            dReview.value = ''
+        } catch (err) {
+          console.log(err)
         }
-      } catch (err) {
-        console.log(err)
+      }
+      else {
+        reviewPos.value = false
       }
     }
 
@@ -149,7 +159,7 @@ export default {
         .eq('id', revId)
         reviewsCon.value = reviews
       } catch (error) {
-        console.log(error)
+        // console.log(error)
       }
     }
 
@@ -177,13 +187,31 @@ export default {
       sendReview,
       dReview,
       reviewsCon,
-      dateTime
+      dateTime,
+      reviewPos
     }
   }
 }
 </script>
 
 <style scoped>
+.error {
+  color: rgb(34, 27, 27);
+  padding: 10px;
+  font-size: 0.7rem;
+}
+
+.reviews p {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: rgb(34, 27, 27);
+  margin-bottom: 15px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
 .ccard {
   display: flex;
 }

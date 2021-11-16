@@ -180,7 +180,7 @@ export default {
   width: 100%;
   width: -webkit-fill-available;
   width: -moz-available;
-  width: fill-available;
+  width: stretch;
   padding: 20px;
   margin: 15px 10px;
   background-color: #E8E8E8;

@@ -184,11 +184,6 @@ export default {
 </script>
 
 <style scoped>
-.ccontainer {
-  margin: 60px auto;
-  margin-bottom: 0px;
-}
-
 .ccard {
   display: flex;
 }

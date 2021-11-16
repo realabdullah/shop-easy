@@ -69,10 +69,6 @@
                       <input type="text" name="country">
                     </div>
                     <div class="field padding-bottom--24">
-                      <label for="name">Full Name</label>
-                      <input type="text" name="name">
-                    </div>
-                    <div class="field padding-bottom--24">
                       <input type="submit" name="submit" value="Continue">
                     </div>
                   </form>
@@ -121,7 +117,6 @@ export default {
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
 
 .checkout-cont {
-  margin-top: 100px;
   display: flex;
   align-items: flex-start;
   justify-content: space-evenly;

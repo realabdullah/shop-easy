@@ -135,7 +135,6 @@ export default {
           }
         )
         curUser.value = user.id
-        // console.log(curUser)
         pushMeta()
         router.push('/sign-in')
       }

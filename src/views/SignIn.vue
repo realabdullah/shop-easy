@@ -77,6 +77,7 @@ export default {
     Navbar
   },
   setup() {
+    const session = supabase.auth.session()
     const router = useRouter()
     const email = ref('')
     const password = ref('')
@@ -88,6 +89,7 @@ export default {
           password: password.value
         })
         router.push('/')
+        console.log(session)
       }
       catch(error) {
         console.log('Error signing in!')

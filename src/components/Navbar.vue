@@ -173,20 +173,14 @@
           </p>
         </li>
         <li>
-          <router-link to="/" v-if="curUser">
+          <router-link :to="`/user/${user.user_metadata.first_name}`" v-if="session">
             <button class="login">
-              Dashboard
+              Profile
             </button>
           </router-link>
-
           <router-link to="/sign-up" v-else>
             <button class="login">
               Create account
-            </button>
-          </router-link>
-          <router-link :to="`/user/${user.user_metadata.first_name}`" v-if="user">
-            <button class="login">
-              Profile
             </button>
           </router-link>
         </li>
@@ -225,6 +219,7 @@ export default {
     'curUser'
   ],
   setup() {
+    const session = supabase.auth.session()
     const store = useStore()
     const user = supabase.auth.user()
     const cartOpen = ref(true)
@@ -244,6 +239,7 @@ export default {
 
     onBeforeMount(() => {
       const user = supabase.auth.user()
+      console.log(user)
     })
 
     return {
@@ -253,7 +249,8 @@ export default {
       openCart,
       closeCart,
       formatPrice,
-      user
+      user,
+      session
     }
   }
 }
@@ -265,7 +262,7 @@ export default {
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   /* background-image: linear-gradient(to right top, #6138d6, #5d32dd, #5a2be3, #5523ea, #5018f0); */
-  position: fixed;
+  position: sticky;
   top: 0;
   right: 0;
   left: 0;
@@ -287,7 +284,7 @@ export default {
 
 .logo svg {
   margin-right: 10px;
-  width: 35px;
+  width: 25px;
   fill: #fff;
   font-weight: bold;
 }
@@ -295,6 +292,7 @@ export default {
 .logo h1 {
   font-family: 'Cookie', cursive;
   color: #fff;
+  font-size: 1.5rem;
 }
 
 .navbar-search input {
@@ -314,7 +312,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-right: 30px;
 }
 
 .navbar-nav nav li {
@@ -329,6 +326,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 5px;
 }
 
 .navbar-nav nav .cart svg {
@@ -355,7 +353,6 @@ export default {
   background: #fff;
   color: rgb(53, 48, 48);
   font-size: 0.7rem;
-  margin-left: 15px;
 }
 
 .navbar-nav nav li a .login:hover {
@@ -370,9 +367,10 @@ export default {
 
 .cart-no {
   position: absolute;
-  top: -15px;
-  right: -30px;
-  padding: 3px 10px;
+  font-size: 0.6rem;
+  top: -7px;
+  right: -10px;
+  padding: 2px;
   border-radius: 100%;
   background-color: #fff;
   color: rgb(53, 48, 48);

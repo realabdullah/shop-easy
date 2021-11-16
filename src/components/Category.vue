@@ -68,7 +68,6 @@
 
 <style scoped>
 .category-cont {
-  margin-top: 300px;
   padding: 30px;
   border-bottom: 2px solid #333;
 }

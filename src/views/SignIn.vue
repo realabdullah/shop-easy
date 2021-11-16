@@ -35,6 +35,9 @@
         </div>
       </div>
       <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+        <div class="footer-link padding-top--24">
+          <span>Don't have an account? <router-link to="/sign-up">Sign Up</router-link></span>
+        </div>
         <div class="formbg-outer">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
@@ -48,17 +51,14 @@
                   <label for="password">Password</label>
                   <input type="password" name="password" v-model="password">
                 </div>
+                <div class="field padding-bottom--24" v-if="incorrect">
+                  <p class="ssolink">Incorrect login details!</p>
+                </div>
                 <div class="field padding-bottom--24">
                   <button class="submit">Sign In</button>
                 </div>
-                <div class="field">
-                  <p class="ssolink" @click="googleSignIn">Use single sign-on (Google) instead</p>
-                </div>
               </form>
             </div>
-          </div>
-          <div class="footer-link padding-top--24">
-            <span>Don't have an account? <router-link to="/sign-up">Sign Up</router-link></span>
           </div>
         </div>
       </div>
@@ -81,6 +81,7 @@ export default {
     const router = useRouter()
     const email = ref('')
     const password = ref('')
+    const incorrect = ref(false)
 
     const signIn = async () => {
       try {
@@ -88,8 +89,13 @@ export default {
           email: email.value,
           password: password.value
         })
-        router.push('/')
-        console.log(session)
+        if(user && session) {
+          router.push('/')
+          console.log(session)
+        }
+        else {
+          incorrect.value = true
+        }
       }
       catch(error) {
         console.log('Error signing in!')
@@ -111,7 +117,7 @@ export default {
       email,
       password,
       signIn,
-      googleSignIn
+      incorrect
     }
   }
 }
@@ -292,10 +298,10 @@ label {
     align-items: center;
     margin: 0;
 }
-a.ssolink {
+p.ssolink {
     display: block;
-    text-align: center;
     font-weight: 600;
+    color: #ee1414;
 }
 .footer-link span {
     font-size: 14px;

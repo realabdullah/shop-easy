@@ -35,6 +35,9 @@
         </div>
       </div>
       <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+        <div class="footer-link padding-top--24">
+          <span>Already have an account? <router-link to="/sign-in">Sign In</router-link></span>
+        </div>
         <div class="formbg-outer">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
@@ -80,14 +83,11 @@
                 <div class="field padding-bottom--24">
                   <button class="submit">Sign Up</button>
                 </div>
-                <div class="field">
+                <!-- <div class="field">
                   <a class="ssolink" href="#">Use single sign-on (Google) instead</a>
-                </div>
+                </div> -->
               </form>
             </div>
-          </div>
-          <div class="footer-link padding-top--24">
-            <span>Already have an account? <router-link to="/sign-in">Sign In</router-link></span>
           </div>
         </div>
       </div>

@@ -68,7 +68,7 @@
 
 <style scoped>
 .category-cont {
-  padding: 30px;
+  padding: 7px;
   border-bottom: 2px solid #333;
 }
 
@@ -97,8 +97,8 @@
 
 .cat-img {
   display: flex;
-  width: 120px;
-  height: 120px;
+  width: 80px;
+  height: 80px;
   border-radius: 100px;
   /* background-image: linear-gradient(to right top, #fd1b2d, #dd1423, #bd0d1a, #9f0511, #820008); */
   background-color: #2e2d2f;
@@ -108,7 +108,7 @@
 }
 
 .cat-img img {
-  width: 70px;
+  width: 40px;
 }
 
 @media(max-width: 800px) {

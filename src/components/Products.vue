@@ -66,7 +66,7 @@ export default {
 <style>
 .products {
   margin-top: 20px;
-  padding: 30px;
+  padding: 7px;
 }
 
 .recommended h2 {

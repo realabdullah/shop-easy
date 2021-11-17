@@ -108,11 +108,7 @@
       </router-link>
 
       <div class="navbar-search">
-        <input type="text" name="search" id="search" placeholder="Search for products..." v-model="search">
-        <p v-if="noResults">Sorry, no results for {{search}}</p>
-        <div v-for="(r, i) in results" :key="i">
-          {{ r }}
-        </div>
+        <input type="text" name="search" id="search" placeholder="Search for products...">
       </div>
 
       <div class="navbar-nav">
@@ -184,11 +180,27 @@
       </div>
     </div>
 
+    <!-- <div class="mnavbar-search">
+      <input type="text" name="search" id="search" placeholder="Search for products..." v-model="search">
+      <p v-if="noResults">
+        Sorry, no results for {{ search }}
+      </p>
+      <div v-for="(product, i) in results" :key="i">
+        <div>
+          {{ product.name }}
+        </div>
+      </div>
+    </div> -->
+
     <div class="mnavbar-search">
       <input type="text" name="search" id="search" placeholder="Search for products..." v-model="search">
-      <p v-if="noResults">Sorry, no results for {{search}}</p>
-      <div v-for="(r, i) in results" :key="i">
-        {{ r }}
+      <p v-if="noResults">
+        Sorry, no results for {{ search }}
+      </p>
+      <div v-for="(product, i) in results" :key="i">
+        <div>
+          {{ product.name }}
+        </div>
       </div>
     </div>
   </div>
@@ -216,10 +228,9 @@
 
 <script>
 import { supabase } from '../supabase'
-import { ref, onBeforeMount, computed } from 'vue'
+import { ref, reactive, onBeforeMount, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useVueFuse } from 'vue-fuse'
-import gettingProduct from '../composables/gettingProduct'
 
 export default {
   props: [
@@ -230,9 +241,10 @@ export default {
     const store = useStore()
     const user = supabase.auth.user()
     const cartOpen = ref(true)
-    const { getProduct } = gettingProduct()
-    const myList = computed(() => store.getters.getProducts)
-    const { search, results, noResults } = useVueFuse(myList)
+    const products = reactive([])
+    const searchQuery = ref('')
+
+    const { search, results, noResults } = useVueFuse(products)
 
     const openCart = () => {
       cartOpen.value = !cartOpen.value
@@ -247,10 +259,27 @@ export default {
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
 
-    onBeforeMount(() => {
+    const searchedProducts = computed(() => {
+      return products.filter((product) => {
+        return (
+          product.name
+            .toLowerCase()
+            .indexOf(searchQuery.value.toLowerCase()) != -1
+        );
+      });
+    });
+
+    onBeforeMount(async () => {
       const user = supabase.auth.user()
-      getProduct()
-      console.log(myList)
+      try {
+        const data = await supabase
+        .from('products')
+        .select('*')
+        products.value = data.data
+      }
+      catch (err) {
+        
+      }
     })
 
     return {
@@ -418,6 +447,12 @@ export default {
 
   .mnavbar-search input::placeholder {
     color: #fff;
+  }
+
+  .mnavbar-search p {
+    padding: 15px 0;
+    color: #fff;
+    font-weight: bold;
   }
 
   .navbar-nav nav li a .login {

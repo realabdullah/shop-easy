@@ -22,6 +22,7 @@
     "swiper": "^7.0.7",
     "vue": "^3.0.0",
     "vue-i18n": "^8.26.5",
+    "vue-loading-overlay": "4.0",
     "vue-money-format": "^1.2.4",
     "vue-router": "^4.0.0-0",
     "vue3-carousel": "^0.1.27",

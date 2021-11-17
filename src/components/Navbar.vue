@@ -1,6 +1,6 @@
 <template>
   <div class="navbar-main">
-    <div>
+    <div class="nav-main">
       <router-link to="/" class="logo">
         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
           viewBox="0 0 201.387 201.387" style="enable-background:new 0 0 201.387 201.387;" xml:space="preserve">
@@ -106,85 +106,82 @@
         </svg>
         <h1>Shop Easy!</h1>
       </router-link>
+
+      <div class="navbar-search">
+        <input type="text" name="search" id="search" placeholder="Search for products...">
+      </div>
+
+      <div class="navbar-nav">
+        <nav>
+          <li class="cart">
+            <p class="bag" @click="openCart">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 512 512">
+    <g>
+      <g>
+        <path d="m440.3,120.4c-1.7-9.8-10.1-17-20-17h-24.9c11.6,31.3 17.2,59.8 17.2,74.2 0,33.8-27.2,61.2-60.7,61.2-33.2,0-60.3-27.1-60.7-60.5-1.6-15.6-17.3-54.5-31-74.9h-8.6c-13.7,20.5-29.4,59.4-31,74.9-0.4,33.4-27.5,60.5-60.7,60.5-33.5,0-60.7-27.5-60.7-61.2 0-14.4 5.6-42.9 17.2-74.2h-25c-9.9,0-18.3,7.2-20,17l-60.1,356.8c-2.1,17.5 12.5,23.8 20,23.8h449.3c0.1,0 0.1,0 0.2,0 11.2,0 20.2-9.1 20.2-20.4 0-2.2-60.7-360.2-60.7-360.2z"/>
+        <path d="m159.9,197.9c11.2,0 20.2-9.1 20.2-20.4 0-22.5 36.9-125.7 75.8-125.7 38.9,0 75.8,103.2 75.8,125.7 0,11.3 9.1,20.4 20.2,20.4 11.2,0 20.2-9.1 20.2-20.4 0-27.1-40.5-166.5-116.3-166.5-75.8,0-116.3,139.4-116.3,166.5 0.1,11.3 9.2,20.4 20.4,20.4z"/>
+      </g>
+    </g>
+              </svg>
+              <span class="cart-no">{{ cart.length }}</span>
+            </p>
+          </li>
+          <li>
+            <router-link :to="`/user/${user.user_metadata.first_name}`" v-if="session">
+              <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    width="45.532px" height="45.532px" viewBox="0 0 45.532 45.532" style="enable-background:new 0 0 45.532 45.532;"
+    xml:space="preserve">
+  <g>
+    <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765
+      S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53
+      c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012
+      c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592
+      c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z"/>
+  </g>
+  <g>
+  </g>
+  <g>
+  </g>
+  <g>
+  </g>
+  <g>
+  </g>
+  <g>
+  </g>
+  <g>
+  </g>
+  <g>
+  </g>
+  <g>
+  </g>
+  <g>
+  </g>
+  <g>
+  </g>
+  <g>
+  </g>
+  <g>
+  </g>
+  <g>
+  </g>
+  <g>
+  </g>
+  <g>
+  </g>
+              </svg>
+            </router-link>
+            <router-link to="/sign-up" v-else>
+              <button class="login">
+                Create account
+              </button>
+            </router-link>
+          </li>
+        </nav>
+      </div>
     </div>
 
-    <!-- <div class="navbar-search">
+    <div class="mnavbar-search">
       <input type="text" name="search" id="search" placeholder="Search for products...">
-    </div> -->
-
-    <div class="navbar-nav">
-      <nav>
-        <li class="cart">
-          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-  viewBox="0 0 450.391 450.391" style="enable-background:new 0 0 450.391 450.391;" xml:space="preserve">
-<g>
-  <g>
-    <g>
-      <path d="M143.673,350.322c-25.969,0-47.02,21.052-47.02,47.02c0,25.969,21.052,47.02,47.02,47.02
-        c25.969,0,47.02-21.052,47.02-47.02C190.694,371.374,169.642,350.322,143.673,350.322z M143.673,423.465
-        c-14.427,0-26.122-11.695-26.122-26.122c0-14.427,11.695-26.122,26.122-26.122c14.427,0,26.122,11.695,26.122,26.122
-        C169.796,411.77,158.1,423.465,143.673,423.465z"/>
-      <path d="M342.204,350.322c-25.969,0-47.02,21.052-47.02,47.02c0,25.969,21.052,47.02,47.02,47.02s47.02-21.052,47.02-47.02
-        C389.224,371.374,368.173,350.322,342.204,350.322z M342.204,423.465c-14.427,0-26.122-11.695-26.122-26.122
-        c0-14.427,11.695-26.122,26.122-26.122s26.122,11.695,26.122,26.122C368.327,411.77,356.631,423.465,342.204,423.465z"/>
-      <path d="M448.261,76.037c-2.176-2.377-5.153-3.865-8.359-4.18L99.788,67.155L90.384,38.42
-        C83.759,19.211,65.771,6.243,45.453,6.028H10.449C4.678,6.028,0,10.706,0,16.477s4.678,10.449,10.449,10.449h35.004
-        c11.361,0.251,21.365,7.546,25.078,18.286l66.351,200.098l-5.224,12.016c-5.827,15.026-4.077,31.938,4.702,45.453
-        c8.695,13.274,23.323,21.466,39.184,21.943h203.233c5.771,0,10.449-4.678,10.449-10.449c0-5.771-4.678-10.449-10.449-10.449
-        H175.543c-8.957-0.224-17.202-4.936-21.943-12.539c-4.688-7.51-5.651-16.762-2.612-25.078l4.18-9.404l219.951-22.988
-        c24.16-2.661,44.034-20.233,49.633-43.886l25.078-105.012C450.96,81.893,450.36,78.492,448.261,76.037z M404.376,185.228
-        c-3.392,15.226-16.319,26.457-31.869,27.69l-217.339,22.465L106.58,88.053l320.261,4.702L404.376,185.228z"/>
-    </g>
-  </g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-          </svg>
-          <p class="bag" @click="openCart">Bag
-            <span class="cart-no">{{ cart.length }}</span>
-          </p>
-        </li>
-        <li>
-          <router-link :to="`/user/${user.user_metadata.first_name}`" v-if="session">
-            <button class="login">
-              Profile
-            </button>
-          </router-link>
-          <router-link to="/sign-up" v-else>
-            <button class="login">
-              Create account
-            </button>
-          </router-link>
-        </li>
-      </nav>
     </div>
   </div>
 
@@ -267,12 +264,15 @@ export default {
   left: 0;
   z-index: 999;
   padding: 10px 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   /* box-shadow: 0px 4px 5px -2px rgba(54,50,50,0.53);
   -webkit-box-shadow: 0px 4px 5px -2px rgba(54,50,50,0.53);
   -moz-box-shadow: 0px 4px 5px -2px rgba(54,50,50,0.53); */
+}
+
+.navbar-main .nav-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
@@ -303,7 +303,6 @@ export default {
 }
 
 .navbar-search input::placeholder {
-  font-weight: bold;
   color: #fff;
 }
 
@@ -315,22 +314,14 @@ export default {
 
 .navbar-nav nav li {
   list-style-type: none;
-  padding: 15px;
+  padding: 0 8px;
   cursor: pointer;
   font-weight: 400;
   color: #fff;
 }
 
-.navbar-nav nav .cart {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 5px;
-}
-
 .navbar-nav nav .cart svg {
   width: 23px;
-  margin-right: 7px;
   fill: #fff;
 }
 
@@ -342,6 +333,11 @@ export default {
 .navbar-nav nav li:hover {
   color: #e3e2f0;
   transition: 0.2s ease-in;
+}
+
+.navbar-nav nav li a svg {
+  fill: #fff;
+  width: 30px;
 }
 
 .navbar-nav nav li a .login {
@@ -368,15 +364,20 @@ export default {
   position: absolute;
   font-size: 0.6rem;
   top: -7px;
-  right: -10px;
+  right: -5px;
   padding: 2px;
   border-radius: 100%;
   background-color: #fff;
   color: rgb(53, 48, 48);
 }
 
+.mnavbar-search {
+  display: none;
+}
+
 @media(max-width: 800px) {
   .navbar-main {
+    flex-direction: column;
     padding: 10px 7px;
   }
 
@@ -384,18 +385,30 @@ export default {
     display: none;
   }
 
+  .mnavbar-search {
+    display: block;
+    margin-top: 10px;
+  }
+
+  .mnavbar-search input {
+    width: 100%;
+    background: transparent;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+  }
+
+  .mnavbar-search input::placeholder {
+    color: #fff;
+  }
+
   .navbar-nav nav li a .login {
     padding: 7px 10px;
     font-size: 10px;
   }
 
-  .navbar-nav nav li {
-    padding: 8px;
-  }
-
   .navbar-nav nav .cart svg {
-    width: 18px;
-    margin-right: 5px;
+    width: 25px;
   }
 
   .navbar-nav nav .cart p {

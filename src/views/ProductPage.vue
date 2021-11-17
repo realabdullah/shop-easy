@@ -1,6 +1,8 @@
 <template>
   <Navbar />
 
+  <loading v-model:active="isLoading" :can-cancel="true" :is-full-page="fullPage"/>
+
   <div class="ccontainer">
     <div class="ccard">
       <div class="card-head">
@@ -75,11 +77,14 @@ import { supabase } from '../supabase'
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 import { useStore } from 'vuex'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   components: {
     Navbar,
-    Footer
+    Footer,
+    Loading
   },
   setup() {
     const user = supabase.auth.user()
@@ -91,6 +96,8 @@ export default {
     const dReview = ref('')
     const reviewsCon = ref([])
     const reviewPos = ref(true)
+    const isLoading = ref(false)
+    const fullPage = ref(true)
 
     const productInfo = reactive({
       id: '',
@@ -122,7 +129,7 @@ export default {
           ])
             dReview.value = ''
         } catch (err) {
-          console.log(err)
+          // console.log(err)
         }
       }
       else {
@@ -132,6 +139,7 @@ export default {
 
     const getProductInfo = async () => {
       try {
+        isLoading.value = true
         const data = await supabase
         .from('products')
         .select('*')
@@ -144,9 +152,10 @@ export default {
         productInfo.price = newDetails.price,
         productInfo.file = newDetails.file,
         productInfo.available = newDetails.available
+        isLoading.value = false
       }
       catch(error) {
-        console.log(error)
+        // console.log(error)
       }
     }
 
@@ -188,7 +197,9 @@ export default {
       dReview,
       reviewsCon,
       dateTime,
-      reviewPos
+      reviewPos,
+      isLoading,
+      fullPage
     }
   }
 }

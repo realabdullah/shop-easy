@@ -1,6 +1,9 @@
 <template>
   <Navbar />
   <div class="user">
+
+    <loading v-model:active="isLoading" :can-cancel="true" :is-full-page="fullPage"/>
+
     <div class="welcome">
       <div class="d">
         <h3>Welcome, {{ userInfo.first_name }}</h3>
@@ -25,7 +28,7 @@
       </div>
     </div>
 
-    <div class="settings">
+    <div class="details">
       <h2>Account Settings</h2>
       <div class="adetails">
         <li>
@@ -40,35 +43,6 @@
         </li>
       </div>
     </div>
-
-    <div class="cart">
-      <div class="shopping-cart">
-        <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-          <h2>Your Cart ({{cart.length}})</h2>
-        </div>
-        <ul class="shopping-cart-items">
-          <li class="clearfix" v-for="item in cart" :key="item.id">
-            <img :src="item.file" alt="admin">
-            <span class="item-name">{{ item.name }}</span>
-            <span class="item-price">
-              <span> &#8358; {{ formatPrice(item.price) }}</span>
-            </span>
-          </li>
-        </ul>
-
-        <div class="shopping-cart-header">
-          <span class="badge">
-            <i class="fa fa-shopping-cart cart-icon"></i>
-            {{cart.length}}
-          </span>
-          <div class="shopping-cart-total">
-            <span class="lighter-text">Total: </span>
-            <span> &#8358; {{ formatPrice(total) }} </span>
-            <!-- <span class="main-color-text">$2,229.97</span> -->
-          </div>
-        </div> <!--end shopping-cart-header -->
-      </div>
-    </div>
   </div>
   <Footer />
 </template>
@@ -76,21 +50,24 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
-import { ref, reactive, computed, onBeforeMount } from 'vue'
+import { ref, reactive, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '../supabase'
-import { useStore } from 'vuex'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   components: {
     Navbar,
-    Footer
+    Footer,
+    Loading
   },
   setup() {
     const router = useRouter()
     const userInfoHolder = ref([])
     const user = supabase.auth.user()
-    const store = useStore()
+    const isLoading = ref(false)
+    const fullPage = ref(true)
 
     const userInfo = reactive({
       id: '',
@@ -102,13 +79,9 @@ export default {
       state: ''
     })
 
-    function formatPrice(value) {
-      let val = (value/1).toFixed(2).replace(',', '.')
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    }
-
     const getUserInfo = async () => {
       try {
+        isLoading.value = true
         const data = await supabase
         .from('profiles')
         .select('*')
@@ -122,9 +95,10 @@ export default {
         userInfo.email = userData.email,
         userInfo.country = userData.country,
         userInfo.state = userData.state
+        isLoading.value = false
       }
       catch(error) {
-        console.log(error)
+        // console.log(error)
       }
     }
 
@@ -134,7 +108,7 @@ export default {
         router.push('/')
       }
       catch(error) {
-        console.log(error)
+        // console.log(error)
       }
     }
 
@@ -146,9 +120,8 @@ export default {
     return {
       userInfo,
       logOut,
-      cart: computed(() => store.getters.getCart),
-      total: computed(() => store.getters.getTotal),
-      formatPrice
+      isLoading,
+      fullPage
     }
   }
 }
@@ -192,6 +165,13 @@ export default {
   color: #fff;
 }
 
+.settings h2 {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #2e2b2bb2;
+  color: #fff;
+}
+
 .adetails {
   width: 100%;
   width: -webkit-fill-available;
@@ -208,7 +188,10 @@ export default {
   padding: 10px 20px;
   list-style-type: none;
   border-bottom: 0.01rem solid #333;
- 
+}
+
+.adetails li a {
+  color: #2e2b2b;
 }
 
 .shopping-cart {

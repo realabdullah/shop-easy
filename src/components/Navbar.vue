@@ -108,7 +108,11 @@
       </router-link>
 
       <div class="navbar-search">
-        <input type="text" name="search" id="search" placeholder="Search for products...">
+        <input type="text" name="search" id="search" placeholder="Search for products..." v-model="search">
+        <p v-if="noResults">Sorry, no results for {{search}}</p>
+        <div v-for="(r, i) in results" :key="i">
+          {{ r }}
+        </div>
       </div>
 
       <div class="navbar-nav">
@@ -181,7 +185,11 @@
     </div>
 
     <div class="mnavbar-search">
-      <input type="text" name="search" id="search" placeholder="Search for products...">
+      <input type="text" name="search" id="search" placeholder="Search for products..." v-model="search">
+      <p v-if="noResults">Sorry, no results for {{search}}</p>
+      <div v-for="(r, i) in results" :key="i">
+        {{ r }}
+      </div>
     </div>
   </div>
 
@@ -210,6 +218,8 @@
 import { supabase } from '../supabase'
 import { ref, onBeforeMount, computed } from 'vue'
 import { useStore } from 'vuex'
+import { useVueFuse } from 'vue-fuse'
+import gettingProduct from '../composables/gettingProduct'
 
 export default {
   props: [
@@ -220,6 +230,9 @@ export default {
     const store = useStore()
     const user = supabase.auth.user()
     const cartOpen = ref(true)
+    const { getProduct } = gettingProduct()
+    const myList = computed(() => store.getters.getProducts)
+    const { search, results, noResults } = useVueFuse(myList)
 
     const openCart = () => {
       cartOpen.value = !cartOpen.value
@@ -236,6 +249,8 @@ export default {
 
     onBeforeMount(() => {
       const user = supabase.auth.user()
+      getProduct()
+      console.log(myList)
     })
 
     return {
@@ -246,7 +261,10 @@ export default {
       closeCart,
       formatPrice,
       user,
-      session
+      session,
+      search,
+      results,
+      noResults
     }
   }
 }

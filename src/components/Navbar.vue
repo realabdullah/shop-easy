@@ -219,6 +219,9 @@
         <img :src="item.file" alt="admin">
         <span class="item-name">{{ item.name }}</span>
         <span class="item-price"><span> &#8358; </span>{{ formatPrice(item.price) }}</span>
+        <p class="del" @click="removeProduct(item.id)">
+          <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2h4a1 1 0 1 1 0 2h-1.069l-.867 12.142A2 2 0 0 1 17.069 22H6.93a2 2 0 0 1-1.995-1.858L4.07 8H3a1 1 0 0 1 0-2h4V4zm2 2h6V4H9v2zM6.074 8l.857 12H17.07l.857-12H6.074zM10 10a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1z" fill="#ff0000"/></svg>
+        </p>
       </li>
     </ul>
 
@@ -269,6 +272,10 @@ export default {
       });
     });
 
+    function removeProduct(id) {
+      store.dispatch("removeProduct", id);
+    }
+
     onBeforeMount(async () => {
       const user = supabase.auth.user()
       try {
@@ -285,6 +292,7 @@ export default {
     return {
       cart: computed(() => store.getters.getCart),
       total: computed(() => store.getters.getTotal),
+      removeProduct,
       cartOpen,
       openCart,
       closeCart,
@@ -300,6 +308,12 @@ export default {
 </script>
 
 <style scoped>
+.del {
+  cursor: pointer;
+  font-weight: bold;
+  color: #ff0000;
+}
+
 .navbar-main {
   background: #353030;
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
@@ -469,9 +483,6 @@ export default {
   }
 }
 
-@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
-@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
-
 .shopping-cart {
   margin: 20px 0;
   background: white;
@@ -499,16 +510,15 @@ export default {
   margin-bottom: 18px;
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: stretch;
 }
 .shopping-cart .shopping-cart-items img {
-  width: 100px;
+  width: 30px;
   margin-right: 10px;
 }
 .shopping-cart .shopping-cart-items .item-name {
-  display: block;
-  font-size: 16px;
+  font-size: 0.8rem;
 }
 .shopping-cart .shopping-cart-items .item-price {
   color: #353030;;

@@ -51,6 +51,9 @@
                   <label for="password">Password</label>
                   <input type="password" name="password" v-model="password">
                 </div>
+                <div class="footer-link padding-top--24">
+                  <span>Forgot password?<router-link to="/reset-password/">click here</router-link></span>
+                </div>
                 <div class="field padding-bottom--24" v-if="incorrect">
                   <p class="ssolink">Incorrect login details!</p>
                 </div>

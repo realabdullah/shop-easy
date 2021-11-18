@@ -19,7 +19,7 @@ const routes = [
     component: () => import('../views/UserProfile.vue')
   },
   {
-    path: '/edit/:id',
+    path: '/edit/',
     name: 'Edit Profile',
     component: () => import('../views/EditProfile.vue')
   },
@@ -27,6 +27,11 @@ const routes = [
     path: '/change-password/',
     name: 'Change Password',
     component: () => import('../views/ChangePassword.vue')
+  },
+  {
+    path: '/reset-password/',
+    name: 'Reset Password',
+    component: () => import('../views/ForgetPassword.vue')
   },
   {
     path: '/checkout',

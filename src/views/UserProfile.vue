@@ -37,7 +37,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/sign-up">
+          <router-link to="/change-password/">
             Change Password
           </router-link>
         </li>

@@ -193,7 +193,7 @@
     </div> -->
 
     <div class="mnavbar-search">
-      <input type="text" name="search" id="search" placeholder="Search for products..." v-model="search">
+      <input type="text" name="search" placeholder="Search for products..." v-model="search">
       <p v-if="noResults">
         Sorry, no results for {{ search }}
       </p>

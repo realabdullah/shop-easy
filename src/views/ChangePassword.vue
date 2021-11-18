@@ -9,41 +9,11 @@
         <div class="formbg-outer">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
-              <span class="padding-bottom--15">Update Profile</span>
-              <form id="stripe-login" @submit.prevent="updateProfile">
-                <!-- <div class="field padding-bottom--24">
-                  <label for="username">Username</label>
-                  <input type="text" name="username" v-model="username">
-                </div> -->
+              <span class="padding-bottom--15">Change Password</span>
+              <form id="stripe-login" @submit.prevent="updatePassword">
                 <div class="field padding-bottom--24">
-                  <label for="first-name">First Name</label>
-                  <input type="text" name="first-name" v-model="profileUpdate.first_name">
-                </div>
-                <div class="field padding-bottom--24">
-                  <label for="last-name">Last Name</label>
-                  <input type="text" name="last-name" v-model="profileUpdate.last_name">
-                </div>
-                <!-- <div class="field padding-bottom--24">
-                  <label for="email">Email</label>
-                  <input type="email" name="email" v-model="profileUpdate.email">
-                </div> -->
-                <!-- <div class="field padding-bottom--24">
-                  <div class="grid--50-50">
-                    <label for="password">Password</label>
-                  </div>
-                  <input type="password" name="password" v-model="password">
-                </div> -->
-                <div class="field padding-bottom--24">
-                  <label for="phone">Mobile Number</label>
-                  <input type="telephone" name="phone" v-model="profileUpdate.phone">
-                </div>
-                <div class="field padding-bottom--24">
-                  <label for="country">Country</label>
-                  <input type="text" name="country" v-model="profileUpdate.country">
-                </div>
-                <div class="field padding-bottom--24">
-                  <label for="state">State</label>
-                  <input type="text" name="state" v-model="profileUpdate.state">
+                  <label for="password">New Password</label>
+                  <input type="password" name="password" v-model="newPassword">
                 </div>
                 <div class="field padding-bottom--24"><button class="submi" v-if="loading">
                     <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
@@ -63,10 +33,10 @@
                     </g>
                   </svg>
                   </button>
-                  <button class="submit" v-else>Update</button>
+                  <button class="submit" v-else>Change Password</button>
                 </div>
                 <div class="field padding-bottom--24" v-if="updated">
-                  <p class="updated">Profile updated successfully.</p>
+                  <p class="updated">Password Changed.</p>
                 </div>
               </form>
             </div>
@@ -81,9 +51,8 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
-import { reactive, ref, onBeforeMount } from 'vue'
+import { ref } from 'vue'
 import { supabase } from '../supabase'
-import { useRouter } from 'vue-router'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 
@@ -94,58 +63,17 @@ export default {
     Loading
   },
   setup() {
-    const router = useRouter()
-    const profileUpdateData = ref([])
     const user = supabase.auth.user()
+    const newPassword = ref('')
     const loading = ref(false)
     const updated = ref(false)
     const isLoading = ref(false)
     const fullPage = ref(true)
 
-    const profileUpdate = reactive({
-      first_name: '',
-      last_name: '',
-      phone: '',
-      country: '',
-      state: ''
-    })
-
-    const getProfileForUpdate = async () => {
-      try {
-        isLoading.value = true
-        const data = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single()
-        const readyUpdate = profileUpdateData.value = data.data
-        profileUpdate.first_name = readyUpdate.first_name,
-        profileUpdate.last_name = readyUpdate.last_name,
-        profileUpdate.phone = readyUpdate.phone,
-        profileUpdate.country = readyUpdate.country,
-        profileUpdate.state = readyUpdate.state
-        isLoading.value = false
-      }
-      catch (err) {
-        
-      }
-    }
-
-    const updateProfile = async () => {
+    const updatePassword = async () => {
       try {
         loading.value = true
-        let { error } = await supabase
-        .from('profiles')
-        .update({
-          first_name: profileUpdate.first_name,
-          last_name: profileUpdate.last_name,
-          phone: profileUpdate.phone,
-          country: profileUpdate.country,
-          state: profileUpdate.state
-        })
-        .eq('id', user.id)
-        .single()
-        updateMeta()
+        const { user, error } = await supabase.auth.update({password: newPassword.value})
         loading.value = false
         updated.value = true
       } catch (error) {
@@ -153,32 +81,9 @@ export default {
       }
     }
 
-    const updateMeta = async () => {
-      try {
-        const { user } = await supabase.auth.update({ 
-          data: {
-            first_name: profileUpdate.first_name,
-            last_name: profileUpdate.last_name,
-            phone: profileUpdate.phone,
-            country: profileUpdate.country,
-            state: profileUpdate.state
-          } 
-        })
-      }
-      catch(error) {
-
-      }
-    }
-
-    onBeforeMount(() => {
-      getProfileForUpdate()
-      
-      console.log(user)
-    })
-
     return {
-      profileUpdate,
-      updateProfile,
+      newPassword,
+      updatePassword,
       loading,
       updated,
       isLoading,
